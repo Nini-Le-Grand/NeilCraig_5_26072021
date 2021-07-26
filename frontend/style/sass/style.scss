@@ -1,0 +1,128 @@
+@import "./variables";
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+header {
+    background-color: $couleur-primaire;
+    display: flex;
+    justify-content: space-around;
+}
+
+.descriptif {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    height: 200px;
+    margin: 20px 0px;
+}
+
+.ventes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin: 20px 0px;
+}
+
+
+footer {
+    height: 300px;
+    background-color: $couleur-primaire;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+
+.article {
+    display: flex;
+    padding: 15px;
+    width: 500px;
+    border: 1px solid blue;
+
+    &__information {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        margin-left: 10px;
+
+        &__header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+    }
+
+    &__description {
+        margin-bottom: 10px;
+    }
+
+    &__color {
+        margin-bottom: 10px;
+
+        &__list {
+            align-items: left;
+        }
+    }
+
+    &__picture {
+        height: 300px;
+        width: 250px;
+        border: 1px solid red;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__boutons {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+
+        &__voirProduit {
+            display: flex;
+            text-align: center;
+            padding: 5px;
+            border-radius: 9999px;
+            background-color: $couleur-primaire;
+        }
+
+        &__addPanier {
+            display: flex;
+            text-align: center;
+            padding: 5px;
+            border-radius: 9999px;
+            background-color: $couleur-primaire;
+        }
+    }
+}
+
+.colorPicker {
+    display: block;
+    width: 100px;
+    height: 10px;
+    border: 1px solid black;
+}
