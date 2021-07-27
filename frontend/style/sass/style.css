@@ -3,15 +3,44 @@
   padding: 0;
 }
 
+body {
+  background-color: #f3e9f1;
+}
+
 .container {
   max-width: 900px;
   margin: auto;
+  background-color: #f3edeb;
 }
 
-header {
+.lien {
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: black;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
   background-color: #f3e9f1;
+}
+
+.logo {
+  margin-left: 30px;
+  flex: 1;
+}
+
+.nav {
+  align-self: center;
+  margin-right: 30px;
+  flex: 1;
+}
+
+.menu {
   display: flex;
   justify-content: space-around;
+  font-size: 22px;
 }
 
 .descriptif {
@@ -19,23 +48,31 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
   height: 200px;
   margin: 20px 0px;
+  font-size: 18px;
+}
+.descriptif__text {
+  padding: 0 30px;
 }
 
 .ventes {
+  background-color: #f3edeb;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
   margin: 20px 0px;
+  font-size: 18px;
+}
+
+#teddiesArticle {
+  padding: 0 50px;
+  background-color: white;
 }
 
 footer {
   height: 300px;
-  background-color: #f3e9f1;
 }
 
 h2 {
@@ -52,8 +89,12 @@ ul {
 .article {
   display: flex;
   padding: 15px;
+  margin: 40px 0px;
   width: 500px;
-  border: 1px solid blue;
+  box-shadow: #dbdbdb 0px 0px 4px 1px;
+}
+.article:hover {
+  box-shadow: #dbdbdb 0px 0px 6px 3px;
 }
 .article__information {
   display: flex;
@@ -78,7 +119,6 @@ ul {
 .article__picture {
   height: 300px;
   width: 250px;
-  border: 1px solid red;
 }
 .article__picture img {
   height: 100%;
@@ -91,7 +131,7 @@ ul {
   justify-content: space-between;
   padding: 10px;
 }
-.article__boutons__voirProduit {
+.article__boutons__showProduct {
   display: flex;
   text-align: center;
   padding: 5px;
