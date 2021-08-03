@@ -6,41 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta robot="index, follow">
     <meta description="">
-
+    
     <link rel="stylesheet" href="../style/sass/style.css">
+    <script src="https://kit.fontawesome.com/7f7cd5e7f3.js" crossorigin="anonymous"></script>
     <title>Site de vente en ligne | Orinoco</title>
 </head>
 
-<body>
-    <div class="container">
-        <header>
-            <div>
-                <img src="../images/logoResized.png" alt="Le logo d'Orinoco">
+<body class="bgd-s">
+    <header class="header">
+        <div class="containerHeader">
+            <div class="logo">
+                <a href="../../index.html" class="lien">
+                    <img src="../images/logoResized.png" alt="Le logo d'Orinoco">
+                </a>
             </div>
-            <nav>
-                <ul>
-                    <li>Accueil</li>
-                    <li>Panier</li>
-                    <li>S'identifier</li>
-                </ul>
-            </nav> 
-        </header>
+            <div class="logoPanier">
+                <a href="./panier.html">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>Panier
+                </a>
+            </div> 
+        </div>
+    </header>
 
+    <section class="blocProduct">
+        <div class="blocProductContainer">
 
-        
-        <footer>
-            <h2>
+            <h1 class="titleProduct">
+                Article séléctionné
+            </h1>
+
+            <article id="product" class="product">
+            </article>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="containerFooter">
+            <h2 class="footerTitle">
                 Orinoco, site de vente en ligne
             </h2>
-            <ul>
-                <li>Facebook</li>
-                <li>Twitter</li>
-                <li>Pinterest</li>
-                <li>Instagram</li>
-            </ul>
-        </footer>
-    </div>
-
- 
+            <ul class="social">
+                <li><i class="fab fa-facebook-square"></i></li>
+                <li><i class="fa fa-twitter-square" aria-hidden="true"></i></li>
+                <li><i class="fa fa-pinterest-square" aria-hidden="true"></i></li>
+                <li><i class="fa fa-snapchat-square" aria-hidden="true"></i></li>
+            </ul>  
+        </div>  
+    </footer>
+    
+    <script src="../js/article.js"></script>
 </body>
 </html>

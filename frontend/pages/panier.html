@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta robot="index, follow">
+    <meta description="">
+    
+    <link rel="stylesheet" href="../style/sass/style.css">
+    <script src="https://kit.fontawesome.com/7f7cd5e7f3.js" crossorigin="anonymous"></script>
+    <title>Site de vente en ligne | Orinoco</title>
+</head>
+
+<body class="bgd-s">
+    <header class="header">
+        <div class="containerHeader">
+            <div class="logo">
+                <a href="../../index.html" class="lien">
+                    <img src="../images/logoResized.png" alt="Le logo d'Orinoco">
+                </a>
+            </div>
+            <div class="logoPanier">
+                <a href="../pages/panier.html">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>Panier
+                </a>
+            </div> 
+        </div>
+    </header>
+
+    <section>
+        <h1>Panier</h1>
+        
+        <div class="produits">
+            <h2>
+                Produits dans le panier :
+            </h2>
+            <ul id="listeProduits" class="produitsPanier">
+
+            </ul>
+            <div id="total" class="totalPanier">
+                Le prix total de vos articles : <span id="totalPrice"></span> €
+            </div>
+        </div>
+    
+
+        <div id="formulaire" class="blocFormulaire">
+            <h2>
+                Adresse de livraison
+            </h2>
+            <form action="get" class="formulaire">
+                <div class="info">
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" id="prenom">
+                    <label for="email">Adresse email</label>
+                    <input type="text" id="email">
+                    <label for="phone">Téléphone</label>
+                    <input type="text" id="phone">
+                </div>
+                
+                <div class="adresse">
+                    <label for="street">N° et voie</label>
+                    <input type="text" id="street">
+                    <label for="ville">Ville</label>
+                    <input type="text" id="ville">
+                    <label for="postal">Code postal</label>
+                    <input type="text" id="postal">
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="containerFooter">
+            <h2 class="footerTitle">
+                Orinoco, site de vente en ligne
+            </h2>
+            <ul class="social">
+                <li><i class="fab fa-facebook-square"></i></li>
+                <li><i class="fa fa-twitter-square" aria-hidden="true"></i></li>
+                <li><i class="fa fa-pinterest-square" aria-hidden="true"></i></li>
+                <li><i class="fa fa-snapchat-square" aria-hidden="true"></i></li>
+            </ul>  
+        </div>  
+    </footer>
+    <script src="../js/panier.js"></script>
+</body>
+</html>

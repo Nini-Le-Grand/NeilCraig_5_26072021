@@ -1,0 +1,52 @@
+.produits {
+    background-color: snow;
+    width: 900px;
+    margin: auto;
+    padding: 10px;
+}
+
+
+.produitsPanier {
+    padding: 10px;
+}
+
+.produitPanier {
+    padding: 5px;
+    margin: 15px 0px;
+    box-shadow: $couleur-primaire 0px 0px 4px 4px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+}
+
+.pricePanier {
+    padding: 7px;
+    box-shadow: $couleur-primaire 0px 0px 1px 1px;
+    border-radius: 9999px;
+}
+
+.totalPanier {
+    margin: auto;
+    padding: 10px;
+}
+
+.blocFormulaire {
+    max-width: 900px;
+    margin: 20px auto;
+    visibility:hidden
+}
+
+.formulaire {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info, .adresse {
+    display: flex;
+    flex-direction: column;
+    width: 47%;
+
+    label{
+        margin-top: 10px;
+    }
+}
