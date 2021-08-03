@@ -26,13 +26,3 @@ function getData() {
     }
 }
 
-
-
-function price() {   
-}
-
-function showProduct() {  
-}
-
-function total() {
-}
