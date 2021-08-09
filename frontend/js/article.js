@@ -1,34 +1,24 @@
-/*-----Display teddy Information depending on its ID-----*/
+let id = getId();
 
-let id;
-getId();
-fetchAPI(id);
+fetch(`http://localhost:3000/api/teddies/${id}`)
+    .then(response => response.json())
+    .then(teddy => displayTeddyHTML(teddy))
+    .catch(error => {
+        alert(error)
+    })
 
-/*-----Find Id referenced in the URL-----*/
 function getId() {
-    queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    id = urlParams.get('id');
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('id');
 }  
 
-/*-----Fetch data of teddy using its Id-----*/
-function fetchAPI(id) {
-    teddy = fetch(`http://localhost:3000/api/teddies/${id}`)
-        .then(response => response.json())
-        .then(teddy => {
-            displayProductHTML(teddy);
-            sortColor(teddy);
-        })
-        .catch(error => {
-            alert(error)
-        })
+function displayTeddyHTML(teddy) {
+    document.getElementById('product').innerHTML = renderTeddyHTML(teddy);
+    displayTeddyChoices(teddy);
 }
 
-/*-----Display object data on HTML page-----*/
-function displayProductHTML(teddy) {
-    return document.getElementById('product').innerHTML += 
-        `<div class="product__display">
-            <div class="product__picture">
+function renderTeddyHTML(teddy) {
+    return `<div class="product__picture">
                 <img src="${teddy.imageUrl}">
             </div>
             <div class="product__information">
@@ -57,66 +47,87 @@ function displayProductHTML(teddy) {
                 <p class="product__reference">
                     Référence : ${teddy._id}
                 </p>
-
-            </div>
-        </div>
-        <div class="product__boutons"> 
-            <button onclick="addTeddyToCart(id)" type="button" id="${teddy._id}" class="btn">
-                Ajouter au panier
-            </button>
-        </div>`;
+            </div>`;
 }
 
-/*-----Loop through object options-----*/
-function sortColor(teddy) {
+function displayTeddyChoices(teddy) {
     for(let teddyColor of teddy.colors) {  
-        displayColorHTML(teddyColor)             
+        document.getElementById(`coloris`).innerHTML += renderChoicesHTML(teddyColor);          
     }
 }
 
-/*-----Display options data on HTML page-----*/
-function displayColorHTML(teddyColor) {
-    return document.getElementById(`coloris`).innerHTML += 
-        `<option value="${teddyColor}">
-            ${teddyColor}
-        </option>`
+function renderChoicesHTML(teddyColor) {
+    return `<option value="${teddyColor}">
+                ${teddyColor}
+            </option>`;
 }
+    
+let quantity = 0;
+document
+    .getElementById("quantity")
+    .innerText = quantity;
+                    
+document
+    .getElementById("oneMore")
+    .addEventListener("click", function() {
+        quantity += 1;
+        console.log(quantity);
+        document
+            .getElementById("quantity")
+            .innerText = quantity;
+    })    
+                    
+document
+    .getElementById("oneLess")
+    .addEventListener("click", function() {
+        if (quantity == 0 ) {
+            return;
+        } else {
+            quantity -= 1;
+            document
+                .getElementById("quantity")
+                .innerText = quantity;
+        }
+    })
 
-
-
-/*-----Add teddy to localStorage ONCLICK-----*/
-
-/*-----Fetch data on teddy using its Id-----*/
-function addTeddyToCart(id) {
-    fetch(`http://localhost:3000/api/teddies/${id}`)
-        .then(response => response.json())
-        .then(teddy => {
-            addTeddy(teddy);
+document
+    .getElementById("ajout")
+    .addEventListener ("click", function() {
+        fetch(`http://localhost:3000/api/teddies/${id}`)
+            .then(response => response.json())
+            .then(teddy => {
+                addTeddy(teddy);
+                panierQuantity = JSON.parse(localStorage.getItem("teddies")).length;
+                document
+                    .getElementById("panierQuantity")
+                    .innerText = panierQuantity;
+                quantity = 0;
+                document
+                    .getElementById("quantity")
+                    .innerText = quantity;
+            })
+            .catch(error => {
+                alert(error)
+            });
         })
-        .catch(error => {
-            alert(error)
-        })
-}
 
-/*-----Check local storage entry-----*/
 function addTeddy(teddy) {
-    let teddyString = JSON.stringify(teddy);
-    if (localStorage.getItem(teddyString) == null) {
-        addItemLS(teddyString);
-    }
-    else if (localStorage.getItem(teddyString) != null) {
-        pushItemLS(teddyString);
+    for (i = 0; i < quantity; i++) {
+        if (localStorage.getItem("teddies") == null) {
+            let teddyList = [];
+            teddyList.push(teddy._id);
+            localStorage.setItem("teddies", JSON.stringify(teddyList));
+        }
+        else if (localStorage.getItem("teddies") != null) {
+            let teddyList = getTeddyList(localStorage);
+            teddyList.push(teddy._id);
+            localStorage.setItem("teddies", JSON.stringify(teddyList));
+        }
     }
 }
 
-/*-----Add object to local storage-----*/
-function addItemLS(teddyString) {
-    let quantity = 1;
-    localStorage.setItem(teddyString, quantity);
+function getTeddyList(localStorage) {
+    return JSON.parse(localStorage.getItem("teddies"));
 }
 
-/*-----Push object quantity-----*/
-function pushItemLS(teddyString) {
-    let newQuantity = parseInt(localStorage.getItem(teddyString)) + 1;
-    localStorage.setItem(teddyString, newQuantity);
-}
+

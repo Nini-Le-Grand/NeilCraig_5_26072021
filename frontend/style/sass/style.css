@@ -1,11 +1,21 @@
+@font-face {
+  font-family: "IndieFlower";
+  src: url("../../fonts/IndieFlower-Regular.ttf");
+}
+@font-face {
+  font-family: "Fred";
+  src: url(../../fonts/FrederickatheGreat-Regular.ttf);
+}
 * {
   margin: 0;
   padding: 0;
+  font-family: "Fred";
 }
 
 a {
   text-decoration: none;
   color: black;
+  font-family: "fred";
 }
 
 .bgd-l {
@@ -46,10 +56,12 @@ footer {
   height: 150px;
   display: flex;
   flex-direction: column;
+  padding-bottom: 60px;
 }
 
 .footerTitle {
   text-align: center;
+  margin: 40px 0px;
 }
 
 .social {
@@ -227,6 +239,25 @@ footer {
   box-shadow: #f3e9f1 0px 0px 4px 2px;
 }
 
+.chooseQuantity {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0px;
+  font-size: 30px;
+}
+
+.rightArrow, .leftArrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  margin: 0px 20px;
+  border-radius: 9999px;
+}
+
 .produits {
   background-color: snow;
   width: 900px;
@@ -266,6 +297,7 @@ footer {
 
 .formulaire {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
@@ -276,11 +308,14 @@ footer {
 }
 .info label, .adresse label {
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .boutonPanier {
   display: flex;
-  margin: 20px auto;
+  justify-self: center;
+  margin: 20px 0px;
   font-size: 20px;
   padding: 20px;
 }/*# sourceMappingURL=style.css.map */

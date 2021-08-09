@@ -1,7 +1,5 @@
 
 getData();
-
-
 function getData() {
     if (localStorage.length == 0) {
         document.getElementById('listeProduits').innerHTML = 'Le panier est vide';
@@ -26,3 +24,33 @@ function getData() {
     }
 }
 
+
+
+
+/*function getValidationSaisie () {
+    return document.getElementById("validationSaisie");
+}
+
+function disableBtn (disabled) {
+    if (disabled) {
+        document
+          .getElementById("submit-btn")
+          .setAttribute("disabled", true);
+    } else {
+        document
+            .getElementById("submit-btn")
+            .removeAttribute(disabled)
+    }
+}
+
+document
+    .getElementById("nom")
+    .addEventListener("input", function(e) {
+        if (/^CODE-/.test(e.target.value)) {
+            getValidationSaisie.innerHTML = "Saisie correcte";
+            disableBtn(false);
+        } else {
+            getValidationSaisie.innerHTML = "Saisie incorrecte";
+            disableBtn(true);
+        }
+    })*/

@@ -1,28 +1,21 @@
-/*-----Display all objects from server on HTML page-----*/
 
-fetchAPI();
+fetch("http://localhost:3000/api/teddies")
+.then(response => response.json())
+.then(teddies => displayTeddies(teddies))
+.catch(error => {alert(error)})
 
-/*-----Fetch data from Server-----*/
-function fetchAPI() {
-    fetch("http://localhost:3000/api/teddies")
-    .then(response => response.json())
-    .then(sortData())
-    .catch(error => {alert(error)})
-}
-
-/*-----Loop through all objects-----*/
-function sortData() {
-    return teddies => {
+function displayTeddies(teddies) {
         for(let teddy of teddies){
-            displayHTML(teddy);
+            displayTeddyHTML(teddy);
         }
-    }
 }
 
-/*-----Display object data on HTML page-----*/
-function displayHTML(teddy) {
-    return document.getElementById('teddiesArticle').innerHTML += 
-        `<article class="article">
+function displayTeddyHTML(teddy) {
+    document.getElementById('teddiesArticle').innerHTML += renderTeddyHTML(teddy);
+}
+
+function renderTeddyHTML(teddy) {
+    return `<article class="article">
             <div class="containerArticle">
                 <h3 class="article__title">
                     ${teddy.name} 

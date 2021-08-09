@@ -1,11 +1,13 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: "Fred";
 }
 
 a {
     text-decoration: none;
     color: black;
+    font-family: "fred";
 }
 
 .bgd-l {
@@ -46,10 +48,12 @@ footer {
     height: 150px;
     display: flex;
     flex-direction: column;
+    padding-bottom: 60px;
 }
 
 .footerTitle {
     text-align: center;
+    margin: 40px 0px;
 }
 
 .social {

@@ -22,7 +22,7 @@
             </div>
             <div class="logoPanier">
                 <a href="./panier.html">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>Panier
+                    Panier <span id="panierQuantity"></span>
                 </a>
             </div> 
         </div>
@@ -35,7 +35,26 @@
                 Article séléctionné
             </h1>
 
-            <article id="product" class="product">
+            <article class="product">
+                <div class="product__display" id="product">
+                </div>
+
+                <div class="product__boutons"> 
+                    <div class="chooseQuantity">
+                        <button type="button" id="oneLess" class="leftArrow">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div id="quantity">
+
+                        </div>
+                        <button type="button" id="oneMore" class="rightArrow">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <button type="button" id="ajout" class="btn">
+                        Ajouter au panier
+                    </button>
+                </div>
             </article>
 
         </div>
@@ -54,7 +73,8 @@
             </ul>  
         </div>  
     </footer>
-    
+
+    <script src="../js/utils.js"></script>
     <script src="../js/article.js"></script>
 </body>
 </html>

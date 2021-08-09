@@ -21,20 +21,17 @@
                 </a>
             </div>
             <div class="logoPanier">
-                <a href="../pages/panier.html">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>Panier
+                <a href="./panier.html">
+                    Panier <span id="panierQuantity"></span>
                 </a>
             </div> 
         </div>
     </header>
 
     <section>
-        <h1>Panier</h1>
+        <h1>Votre panier</h1>
         
         <div class="produits">
-            <h2>
-                Produits dans le panier :
-            </h2>
             <ul id="listeProduits" class="produitsPanier">
 
             </ul>
@@ -48,30 +45,53 @@
             <h2>
                 Adresse de livraison
             </h2>
-            <form action="get" class="formulaire">
+            <!--<form action="get" class="formulaire">
                 <div class="info">
-                    <label for="nom">Nom</label>
-                    <input type="text" id="nom">
-                    <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom">
-                    <label for="email">Adresse email</label>
-                    <input type="text" id="email">
-                    <label for="phone">Téléphone</label>
-                    <input type="text" id="phone">
+
+                    <label for="nom">
+                        <span>Nom</span>
+                        <input type="text" id="nom" name="nom">
+                    </label>
+                    <div id="validationSaisie"></div>
+
+                    <label for="prenom">
+                        <span>Prénom</span>
+                        <input type="text" id="prenom">
+                    </label>
+
+                    <label for="email">
+                        <span>Adresse email</span>
+                        <input type="email" id="email">
+                    </label>
                 </div>
                 
                 <div class="adresse">
-                    <label for="street">N° et voie</label>
-                    <input type="text" id="street">
-                    <label for="ville">Ville</label>
-                    <input type="text" id="ville">
-                    <label for="postal">Code postal</label>
-                    <input type="text" id="postal">
+                    <label for="street">
+                        <span>N° et voie</span>
+                        <input type="text" id="street">
+                    </label>
+
+                    <label for="ville">
+                        <span>Ville</span>
+                        <input type="text" id="ville">
+                    </label>
                 </div>
-            </form>
-            <div>
-                <button id="commander" class="boutonPanier">Commander</button>
-            </div>
+                <div>
+                    <input type="submit" value="Commander" id="submit-btn" class="boutonPanier"/>
+                </div>
+            </form>-->
+            <form id="form-to-check">
+                <p>
+                  <label>Code : <input type="text" name="code" id="code" /></label><br />
+                  <div class="result" id="code-validation"></div>
+                </p>
+                <p>
+                  <label>Email : <input type="email" name="email" required /></label>
+                </p>
+                <p>
+                   <input type="submit" value="Vérifier" id="submit-btn" />
+                </p>
+              </form>
         </div>
     </section>
 
@@ -88,6 +108,7 @@
             </ul>  
         </div>  
     </footer>
+    <script src="../js/utils.js"></script>
     <script src="../js/panier.js"></script>
 </body>
 </html>
