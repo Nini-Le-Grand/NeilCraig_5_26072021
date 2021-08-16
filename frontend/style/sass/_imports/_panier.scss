@@ -1,33 +1,72 @@
-.produits {
-    background-color: snow;
+.containerPanier, .containerFormulaire {
     width: 900px;
-    margin: auto;
-    padding: 10px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: snow;
 }
 
+.produits {
+    display: flex;
+}
+
+.sectionPanier {
+    
+    padding: 30px;
+}
 
 .produitsPanier {
+    margin-right: 20px;
+    border-radius: 15px;
     padding: 10px;
+    box-shadow: 0px 0px 5px 2px $couleur-primaire;
+    flex: 1;
+    background-color: white;
+}
+
+.panierTitle {
+    margin-bottom: 20px;
+}
+
+.namePanier {
+    display: flex;
+    align-items: center;
+}
+
+.quantityPanier {
+    display: flex;
+    align-items: center;
 }
 
 .produitPanier {
-    padding: 5px;
-    margin: 15px 0px;
-    box-shadow: $couleur-primaire 0px 0px 4px 4px;
-    background-color: white;
+    padding: 5px 40px;
+
+    border-bottom: 3px solid $couleur-primaire;
+    
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
-.pricePanier {
-    padding: 7px;
-    box-shadow: $couleur-primaire 0px 0px 1px 1px;
-    border-radius: 9999px;
+.totalProductPrice {
+    display: flex;
+    align-items: center;
 }
 
 .totalPanier {
-    margin: auto;
+    border-radius: 15px;
     padding: 10px;
+    box-shadow: 0px 0px 5px 2px $couleur-primaire;
+    background-color: white;
+    width: 25%;
+}
+
+.totalPanierDetail {
+    height: 40px;
+    padding: 5px;
+    border-bottom: 3px solid $couleur-primaire;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .blocFormulaire {

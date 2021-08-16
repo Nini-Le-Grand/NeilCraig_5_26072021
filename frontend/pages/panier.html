@@ -28,71 +28,94 @@
         </div>
     </header>
 
-    <section>
-        <h1>Votre panier</h1>
-        
-        <div class="produits">
-            <ul id="listeProduits" class="produitsPanier">
+    <section class="sectionPanier">
+        <div class="containerPanier">
 
-            </ul>
-            <div id="total" class="totalPanier">
-                Le prix total de vos articles : <span id="totalPrice"></span> €
+            <h1 class="panierTitle">Votre panier</h1>
+
+            <div class="produits">
+
+                <ul id="listeProduits" class="produitsPanier"></ul>
+
+                <div id="total" class="totalPanier">
+                    <p class="totalPanierDetail">
+                        Nombre d'articles : <span id="itemsQuantity"></span>
+                    </p>
+                    <p class="totalPanierDetail">
+                        Prix total HT: <span id="totalHTPrice"></span>
+                    </p>
+                    <p class="totalPanierDetail">
+                        Taxes (20%) : <span id="taxes"></span>
+                    </p>
+                    <p class="totalPanierDetail">
+                        Prix TTC : <span id="totalPrice"></span>
+                    </p>
+                    
+                </div>
             </div>
         </div>
+
+        <div class="containerFormulaire">
+            <div id="formulaire" class="blocFormulaire">
+                <h2>
+                    Informations de livraison
+                </h2>
+                <p>* champs obligatoires</p>
+                <form method="POST" class="formulaire" name="commande">
     
-
-        <div id="formulaire" class="blocFormulaire">
-            <h2>
-                Adresse de livraison
-            </h2>
-            <!--<form action="get" class="formulaire">
-                <div class="info">
-
-                    <label for="nom">
-                        <span>Nom</span>
+                    <div class="info">
+                        <label for="nom">
+                            <span>Nom *</span> 
+                            <span id="validationSaisieNom"></span>
+                        </label>
                         <input type="text" id="nom" name="nom">
-                    </label>
-                    <div id="validationSaisie"></div>
+                        
+                        <label for="prenom">
+                            <span>Prénom *</span>
+                            <span id="validationSaisiePrenom"></span>
+                        </label>
+                        <input type="text" id="prenom" name="prenom">
+                        
+                        <label for="email">
+                            <span>Adresse email *</span>
+                            <span id="validationSaisieEmail"></span>
+                        </label>
+                        <input type="email" id="email" name="email">
 
-                    <label for="prenom">
-                        <span>Prénom</span>
-                        <input type="text" id="prenom">
-                    </label>
+                        <label for="email">
+                            <span>Confirmation de l'adresse email *</span>
+                            <span id="validationSaisieConfEmail"></span>
+                        </label>
+                        <input type="email" id="confirmation-email" name="confirmation-email">
 
-                    <label for="email">
-                        <span>Adresse email</span>
-                        <input type="email" id="email">
-                    </label>
-                </div>
-                
-                <div class="adresse">
-                    <label for="street">
-                        <span>N° et voie</span>
-                        <input type="text" id="street">
-                    </label>
-
-                    <label for="ville">
-                        <span>Ville</span>
-                        <input type="text" id="ville">
-                    </label>
-                </div>
-                <div>
-                    <input type="submit" value="Commander" id="submit-btn" class="boutonPanier"/>
-                </div>
-            </form>-->
-            <form id="form-to-check">
-                <p>
-                  <label>Code : <input type="text" name="code" id="code" /></label><br />
-                  <div class="result" id="code-validation"></div>
-                </p>
-                <p>
-                  <label>Email : <input type="email" name="email" required /></label>
-                </p>
-                <p>
-                   <input type="submit" value="Vérifier" id="submit-btn" />
-                </p>
-              </form>
+                        <!--<label for="telephone">
+                            <span>Téléphone</span>
+                            <span id="validationSaisieTelephone"></span>
+                        </label>
+                        <input type="tel" id="telephone" name="telephone" placeholder="Téléphone">-->
+                    </div>
+                    
+                    <div class="adresse">
+                        <label for="street">
+                            <span>N° et voie *</span>
+                            <span id="validationSaisieAdresse"></span>
+                        </label>
+                        <input type="text" id="adress" name="adress">
+    
+                        <label for="ville">
+                            <span>Ville *</span>
+                            <span id="validationSaisieVille"></span>
+                        </label>
+                        <input type="text" id="ville" name="ville">
+                    </div>
+    
+                    <div>
+                        <input type="submit" value="Commander" id="submit-btn" class="boutonPanier"/>
+                    </div>
+                </form>
+            </div>
         </div>
+        
     </section>
 
     <footer>
@@ -110,5 +133,6 @@
     </footer>
     <script src="../js/utils.js"></script>
     <script src="../js/panier.js"></script>
+    <script src="../js/formulaire.js"></script>
 </body>
 </html>

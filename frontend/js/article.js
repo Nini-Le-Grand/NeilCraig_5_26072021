@@ -1,8 +1,13 @@
 let id = getId();
+let quantity = 0;
+
+displayCartQuantity();
 
 fetch(`http://localhost:3000/api/teddies/${id}`)
     .then(response => response.json())
-    .then(teddy => displayTeddyHTML(teddy))
+    .then(teddy => 
+        displayTeddy(teddy),
+        )
     .catch(error => {
         alert(error)
     })
@@ -12,12 +17,18 @@ function getId() {
     return urlParams.get('id');
 }  
 
-function displayTeddyHTML(teddy) {
-    document.getElementById('product').innerHTML = renderTeddyHTML(teddy);
-    displayTeddyChoices(teddy);
+function displayTeddy(teddy) {
+    $('#product').innerHTML = render(teddy);
 }
 
-function renderTeddyHTML(teddy) {
+function render(teddy) {
+    let choices = '';
+    for(color of teddy.colors) {  
+        choices += `<option value="${color}">
+                        ${color}
+                    </option>`;          
+    }
+
     return `<div class="product__picture">
                 <img src="${teddy.imageUrl}">
             </div>
@@ -41,7 +52,7 @@ function renderTeddyHTML(teddy) {
                         Coloris disponibles
                     </label>
                     <select name="color" id="coloris" class="product__coloriSelect">
-
+                        ${choices}
                     </select>
                 </form>
                 <p class="product__reference">
@@ -50,84 +61,69 @@ function renderTeddyHTML(teddy) {
             </div>`;
 }
 
-function displayTeddyChoices(teddy) {
-    for(let teddyColor of teddy.colors) {  
-        document.getElementById(`coloris`).innerHTML += renderChoicesHTML(teddyColor);          
+$('#oneMore').addEventListener("click", function() {
+    quantity = addOneToTotal(quantity);
+})
+
+$("#oneLess").addEventListener("click", function() {
+    if (quantity == 0) {
+        return;
+    } else {
+        quantity = substractOneToTotal(quantity);
     }
+})
+
+function addOneToTotal(total) {
+    total = total + 1;
+    $("#quantity").innerText = total;
+    return total;
 }
 
-function renderChoicesHTML(teddyColor) {
-    return `<option value="${teddyColor}">
-                ${teddyColor}
-            </option>`;
+function substractOneToTotal(total) {
+    total = total - 1;
+    $("#quantity").innerText = total;
+    return total;
 }
-    
-let quantity = 0;
-document
-    .getElementById("quantity")
-    .innerText = quantity;
-                    
-document
-    .getElementById("oneMore")
-    .addEventListener("click", function() {
-        quantity += 1;
-        console.log(quantity);
-        document
-            .getElementById("quantity")
-            .innerText = quantity;
-    })    
-                    
-document
-    .getElementById("oneLess")
-    .addEventListener("click", function() {
-        if (quantity == 0 ) {
-            return;
-        } else {
-            quantity -= 1;
-            document
-                .getElementById("quantity")
-                .innerText = quantity;
-        }
-    })
 
-document
-    .getElementById("ajout")
-    .addEventListener ("click", function() {
-        fetch(`http://localhost:3000/api/teddies/${id}`)
+$("#ajout").addEventListener ("click", function() {
+    fetch(`http://localhost:3000/api/teddies/${id}`)
             .then(response => response.json())
             .then(teddy => {
-                addTeddy(teddy);
-                panierQuantity = JSON.parse(localStorage.getItem("teddies")).length;
-                document
-                    .getElementById("panierQuantity")
-                    .innerText = panierQuantity;
-                quantity = 0;
-                document
-                    .getElementById("quantity")
-                    .innerText = quantity;
+                let teddyList = [];
+                let item = {
+                    id: teddy._id,
+                    q: quantity,
+                }
+                
+                if (quantity == 0) {
+                    return;
+                } else {
+                    if (!getLocalStorageValues("teddies")) {
+                        teddyList.push(item);
+                        setLocalStorageValues("teddies", teddyList);
+                        displayCartQuantity()
+                    } else {
+                        teddyList = getLocalStorageValues("teddies");
+                        for(i = 0; i < teddyList.length; i++) {
+                            if (teddyList[i].id == item.id) {
+                                teddyList[i].q = teddyList[i].q + quantity;
+                                setLocalStorageValues("teddies", teddyList);
+                            } 
+                            else if (!teddyList.some(e => e.id === item.id)) {
+                                teddyList.push(item);
+                                setLocalStorageValues("teddies", teddyList);
+                            }
+
+                        }
+                        displayCartQuantity()
+                    }
+                }
+                quantity = resetQuantityChoice(quantity)
             })
-            .catch(error => {
-                alert(error)
-            });
-        })
+})
 
-function addTeddy(teddy) {
-    for (i = 0; i < quantity; i++) {
-        if (localStorage.getItem("teddies") == null) {
-            let teddyList = [];
-            teddyList.push(teddy._id);
-            localStorage.setItem("teddies", JSON.stringify(teddyList));
-        }
-        else if (localStorage.getItem("teddies") != null) {
-            let teddyList = getTeddyList(localStorage);
-            teddyList.push(teddy._id);
-            localStorage.setItem("teddies", JSON.stringify(teddyList));
-        }
-    }
+function resetQuantityChoice(quantity) {
+    quantity = 0;
+    $("#quantity").innerText = quantity;
+    return quantity;
 }
-
-function getTeddyList(localStorage) {
-    return JSON.parse(localStorage.getItem("teddies"));
-}
-
-

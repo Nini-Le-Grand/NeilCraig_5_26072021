@@ -1,20 +1,21 @@
-
 fetch("http://localhost:3000/api/teddies")
 .then(response => response.json())
-.then(teddies => displayTeddies(teddies))
+.then(teddies => displayTeddies(teddies), 
+                 displayCartQuantity()
+                 )
 .catch(error => {alert(error)})
 
 function displayTeddies(teddies) {
         for(let teddy of teddies){
-            displayTeddyHTML(teddy);
+            displayTeddy(teddy);
         }
 }
 
-function displayTeddyHTML(teddy) {
-    document.getElementById('teddiesArticle').innerHTML += renderTeddyHTML(teddy);
+function displayTeddy(teddy) {
+    $('#teddiesArticle').innerHTML += renderTeddy(teddy);
 }
 
-function renderTeddyHTML(teddy) {
+function renderTeddy(teddy) {
     return `<article class="article">
             <div class="containerArticle">
                 <h3 class="article__title">
@@ -31,3 +32,4 @@ function renderTeddyHTML(teddy) {
             </div>
         </article>`;
 }
+

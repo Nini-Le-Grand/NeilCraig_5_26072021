@@ -1,56 +1,53 @@
+let listItem = getLocalStorageValues("teddies");
+let totalPrice = 0;
 
-getData();
-function getData() {
-    if (localStorage.length == 0) {
-        document.getElementById('listeProduits').innerHTML = 'Le panier est vide';
-    }
-    else {
-        let totalPrice=0;
-        for(let i = 0; i < localStorage.length; i++) {
-            let teddy = JSON.parse(localStorage.key(i));
-            let quantity = localStorage.getItem(localStorage.key(i));
-            let quantityPrice = teddy.price/100*quantity;
-            totalPrice += quantityPrice;
+displayCartQuantity();
 
-            document.getElementById('listeProduits').innerHTML +=
-                `<li class="produitPanier">
-                    <span class="namePanier">${teddy.name}</span>
-                    <span class="pricePanier">${teddy.price / 100} €</span>
-                    <span class="quantityPanier">Quantité : ${quantity}</span>
-                </li>`;
-        }
-        document.getElementById('totalPrice').innerHTML = totalPrice;
-        document.getElementById('formulaire').style.visibility = "visible";
-    }
-}
+fetch("http://localhost:3000/api/teddies")
+.then(response => response.json())
+.then(teddies => {
 
-
-
-
-/*function getValidationSaisie () {
-    return document.getElementById("validationSaisie");
-}
-
-function disableBtn (disabled) {
-    if (disabled) {
-        document
-          .getElementById("submit-btn")
-          .setAttribute("disabled", true);
+    if (listItem == null) {
+        $('#listeProduits').innerHTML = renderEmptyCart();
     } else {
-        document
-            .getElementById("submit-btn")
-            .removeAttribute(disabled)
+        matchItems(teddies, listItem);
+
+        $("#itemsQuantity").innerText = displayCartQuantity();
+        $("#totalHTPrice").innerText = `${totalPrice * 80 / 10000} €`;
+        $("#taxes").innerText = `${totalPrice * 20 / 10000} €`;
+        $("#totalPrice").innerText = `${totalPrice / 100} €`;
+        $("#formulaire").style.visibility = "visible";
+    }
+})
+.catch(error => {alert(error)})
+
+function renderEmptyCart() {
+    return 'Le panier est vide';
+}
+
+function renderCart(teddy, item) {
+    return `<li class="produitPanier">
+                <div>
+                    <p class="namePanier">${teddy.name} x${item.q}</p>
+                    <p class="pricePanier">${teddy.price / 100} €</p>
+                </div>
+                <div class="totalProductPrice">
+                    ${teddy.price * item.q / 100} €
+                </div>
+            </li>`;
+}
+
+function matchItems(teddies, listItem) {
+    for(item of listItem) {
+        for(teddy of teddies) {
+            if (teddy._id == item.id) {
+                displayItemsInCart()
+            }
+        }
     }
 }
 
-document
-    .getElementById("nom")
-    .addEventListener("input", function(e) {
-        if (/^CODE-/.test(e.target.value)) {
-            getValidationSaisie.innerHTML = "Saisie correcte";
-            disableBtn(false);
-        } else {
-            getValidationSaisie.innerHTML = "Saisie incorrecte";
-            disableBtn(true);
-        }
-    })*/
+function displayItemsInCart() {
+    totalPrice += teddy.price * item.q;
+    $('#listeProduits').innerHTML += renderCart(teddy, item);
+}

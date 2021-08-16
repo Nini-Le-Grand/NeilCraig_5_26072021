@@ -40,8 +40,16 @@ li {
 }
 
 .logoPanier {
+    border: 1px solid $couleur-primaire;
+    padding: 5px 20px;
+    border-radius: 9999px;
+    background-color: white;
     align-self: center;
     font-size: 30px;
+
+    &:hover {
+        font-weight: bold;
+    }
 }
 
 footer {

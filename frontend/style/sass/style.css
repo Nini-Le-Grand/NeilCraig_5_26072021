@@ -48,8 +48,15 @@ li {
 }
 
 .logoPanier {
+  border: 1px solid #f3e9f1;
+  padding: 5px 20px;
+  border-radius: 9999px;
+  background-color: white;
   align-self: center;
   font-size: 30px;
+}
+.logoPanier:hover {
+  font-weight: bold;
 }
 
 footer {
@@ -119,14 +126,12 @@ footer {
 
 .containerArticle {
   border-radius: 15px;
-  box-shadow: #f3e9f1 0px 0px 4px 1px;
+  box-shadow: #f3e9f1 0px 0px 4px 2px;
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.containerArticle:hover {
-  box-shadow: #f3e9f1 0px 0px 6px 3px;
+  overflow: hidden;
 }
 
 .article {
@@ -139,19 +144,27 @@ footer {
   padding: 10px 0px;
 }
 .article__picture img {
+  display: block;
   width: 100%;
 }
 .article__bouton {
   display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  justify-content: center;
+  padding: 20px 0px;
+  width: 100%;
+  background-color: #f3e9f1;
 }
 .article__bouton__link {
   display: flex;
   text-align: center;
   padding: 15px;
   border-radius: 9999px;
-  background-color: #f3e9f1;
+  background-color: white;
+  box-shadow: 0px 0px 2px 2px #f3e9f1;
+}
+.article__bouton__link:hover {
+  box-shadow: 0px 0px 4px 4px #f3e9f1;
+  font-weight: bold;
 }
 
 .blocProduct {
@@ -258,35 +271,72 @@ footer {
   border-radius: 9999px;
 }
 
-.produits {
-  background-color: snow;
+.containerPanier, .containerFormulaire {
   width: 900px;
-  margin: auto;
-  padding: 10px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: snow;
+}
+
+.produits {
+  display: flex;
+}
+
+.sectionPanier {
+  padding: 30px;
 }
 
 .produitsPanier {
+  margin-right: 20px;
+  border-radius: 15px;
   padding: 10px;
+  box-shadow: 0px 0px 5px 2px #f3e9f1;
+  flex: 1;
+  background-color: white;
+}
+
+.panierTitle {
+  margin-bottom: 20px;
+}
+
+.namePanier {
+  display: flex;
+  align-items: center;
+}
+
+.quantityPanier {
+  display: flex;
+  align-items: center;
 }
 
 .produitPanier {
-  padding: 5px;
-  margin: 15px 0px;
-  box-shadow: #f3e9f1 0px 0px 4px 4px;
-  background-color: white;
+  padding: 5px 40px;
+  border-bottom: 3px solid #f3e9f1;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
-.pricePanier {
-  padding: 7px;
-  box-shadow: #f3e9f1 0px 0px 1px 1px;
-  border-radius: 9999px;
+.totalProductPrice {
+  display: flex;
+  align-items: center;
 }
 
 .totalPanier {
-  margin: auto;
+  border-radius: 15px;
   padding: 10px;
+  box-shadow: 0px 0px 5px 2px #f3e9f1;
+  background-color: white;
+  width: 25%;
+}
+
+.totalPanierDetail {
+  height: 40px;
+  padding: 5px;
+  border-bottom: 3px solid #f3e9f1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .blocFormulaire {
