@@ -13,6 +13,26 @@
 </head>
 
 <body class="bgd-s">
+    <div id="redirect" class="redirect">
+        <div class="redirect__box">
+            <p class="redirect__message">
+                Le produit a été ajouté au panier
+            </p>
+            <p>
+                Voulez-vous afficher le panier ?
+            </p>
+            <div class="redirect__btns">
+                <a href="../../index.html" id="no" class="redirect__btn">
+                    Non
+                </a>
+
+                <a href="./cart.html" id="yes" class="redirect__btn">
+                    Oui
+                </a>
+            </div>
+        </div>
+    </div>
+
     <header class="header">
         <div class="containerHeader">
             <div class="logo">
@@ -21,12 +41,14 @@
                 </a>
             </div>
             <div class="logoPanier">
-                <a href="./panier.html">
+                <a href="./cart.html">
                     Panier <span id="panierQuantity"></span>
                 </a>
             </div> 
         </div>
     </header>
+    
+    
 
     <section class="blocProduct">
         <div class="blocProductContainer">
@@ -41,17 +63,19 @@
 
                 <div class="product__boutons"> 
                     <div class="chooseQuantity">
-                        <button type="button" id="oneLess" class="leftArrow">
+
+                        <button type="button" id="decreaseQty" class="leftArrow">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <div id="quantity">
-                            0
-                        </div>
-                        <button type="button" id="oneMore" class="rightArrow">
+
+                        <div id="quantity">1</div>
+
+                        <button type="button" id="increaseQty" class="rightArrow">
                             <i class="fas fa-chevron-right"></i>
                         </button>
+
                     </div>
-                    <button type="button" id="ajout" class="btn">
+                    <button type="button" id="putInCart" class="btn">
                         Ajouter au panier
                     </button>
                 </div>
@@ -75,6 +99,6 @@
     </footer>
 
     <script src="../js/utils.js"></script>
-    <script src="../js/article.js"></script>
+    <script src="../js/product.js"></script>
 </body>
 </html>

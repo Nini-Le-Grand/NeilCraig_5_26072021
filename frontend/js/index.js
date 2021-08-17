@@ -1,31 +1,28 @@
 fetch("http://localhost:3000/api/teddies")
-.then(response => response.json())
-.then(teddies => displayTeddies(teddies), 
-                 displayCartQuantity()
-                 )
-.catch(error => {alert(error)})
+    .then(response => response.json())
+    .then(products => {
+        displayProducts(products)
+        displayCartQuantity()
+    })
+    .catch(error => {alert(error)})
 
-function displayTeddies(teddies) {
-        for(let teddy of teddies){
-            displayTeddy(teddy);
+function displayProducts(products) {
+        for(let product of products){
+            renderProduct(product);
         }
 }
 
-function displayTeddy(teddy) {
-    $('#teddiesArticle').innerHTML += renderTeddy(teddy);
-}
-
-function renderTeddy(teddy) {
-    return `<article class="article">
+function renderProduct(product) {
+    $('#teddiesArticle').innerHTML += `<article class="article">
             <div class="containerArticle">
                 <h3 class="article__title">
-                    ${teddy.name} 
+                    ${product.name} 
                 </h3>
                 <div class="article__picture">
-                    <img src="${teddy.imageUrl}">
+                    <img src="${product.imageUrl}">
                 </div>
                 <div class="article__bouton">
-                    <a href="./frontend/pages/article.html?id=${teddy._id}" class="article__bouton__link">
+                    <a href="./frontend/pages/product.html?id=${product._id}" class="article__bouton__link">
                         Voir le produit
                     </a>    
                 </div>

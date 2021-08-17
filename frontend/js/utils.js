@@ -2,39 +2,21 @@ function $(parametre) {
     return document.querySelector(parametre);
 }
 
-function getLocalStorageValues(key) {
+function getStore(key) {
     return JSON.parse(localStorage.getItem(key));
 }
 
-function setLocalStorageValues(key, value) {
+function setStore(key, value) {
     return localStorage.setItem(key, JSON.stringify(value));
 }
 
 function displayCartQuantity() {
-    let total = 0;
-    let items = getLocalStorageValues("teddies");
-    let hasItems = hasItemsInCart(items);
-    if (!!hasItems) {
-        total = calculateCartQuantity(total, items)
+    if (!!getStore("teddies")) {
+        let items = getStore("teddies");
+        let cartQuantity = 0;
+        for (item of items) {
+            cartQuantity += item.qty
+        }
+        $("#panierQuantity").innerText = cartQuantity;
     }
-    renderCartQuantity(total)
-    return total;
 }
-
-function hasItemsInCart(items) {
-    if (items != null) {
-        return true;
-    }
-    return false;
-}
-
-function calculateCartQuantity(total, items) {
-    for ( i = 0; i < items.length; i++) {
-        total = total + items[i].q;
-    }
-    return total;
-}
-
-function renderCartQuantity(total) {
-    $("#panierQuantity").innerText = total;
-} 
