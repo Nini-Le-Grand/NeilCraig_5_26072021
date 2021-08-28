@@ -7,59 +7,62 @@
     <meta robot="index, follow">
     <meta description="">
     
-    <link rel="stylesheet" href="./frontend/style/sass/style.css">
+    <link rel="stylesheet" href="./frontend/style/sass/style2.css">
+    <!--<link rel="stylesheet" href="./frontend/style/sass/style.css">-->
     <script src="https://kit.fontawesome.com/7f7cd5e7f3.js" crossorigin="anonymous"></script>
     <title>Site de vente en ligne | Orinoco</title>
 </head>
 
 <body class="bgd-l">
+
     <header class="header">
-        <div class="containerHeader">
-            <div class="logo">
-                <a href="./index.html" class="lien">
-                    <img src="./frontend/images/logoResized.png" alt="Le logo d'Orinoco">
-                </a>
-            </div>
-            <div class="logoPanier">
-                <a href="./frontend/pages/cart.html">
-                    Panier <span id="panierQuantity"></span>
-                </a>
-            </div> 
+        <div class="logo">
+            <a href="./index.html">
+                <img src="./frontend/images/logoResized.png" alt="Le logo d'Orinoco">
+            </a>
         </div>
+        <div class="content"></div>
     </header>
 
-    <section class="descriptif">
-        <div class="containerDescriptif">
-            <h2 class="descriptif__titre">
-                Un site de vente en ligne pas comme les autres
-            </h2>
-            <p class="descriptif__text">
-                Utque aegrum corpus quassari etiam levibus solet offensis, ita animus eius angustus et tener, quicquid increpuisset, ad salutis suae dispendium existimans factum aut cogitatum, insontium caedibus fecit victoriam luctuosam. 
-            </p>
-        </div>
-    </section>
+    <nav id="nav">
+        <div class="navbar">
+            <div class="nav-home">
+                <a href="./index.html" class="link">
+                    Accueil
+                </a>
+            </div>    
+            <div class="nav-panier">
+                <a href="./frontend/pages/cart.html" class="link">
+                    Panier <span id="panierQuantity"></span>
+                </a>
+            </div>  
+        </div> 
+    </nav>
 
-    <section class="ventes">
-        <div class="containerVentes">
-            <h2 class="ventesTitre">
+    <div class="content">
+        <h1>
+            Découvrez nos ours en peluche
+        </h1>
+
+        <section class="catalog">
+            <h2>
                 Articles disponibles
             </h2>
-            <div id="teddiesArticle" class="article__bgd"></div>
-        </div>
-    </section>
+            <div id="teddiesArticle" class="articles">
+            </div>
+        </section>
+    </div>
 
     <footer>
-        <div class="containerFooter">
-            <h2 class="footerTitle">
-                Orinoco, site de vente en ligne
-            </h2>
-            <ul class="social">
-                <li><i class="fab fa-facebook-square"></i></li>
-                <li><i class="fa fa-twitter-square" aria-hidden="true"></i></li>
-                <li><i class="fa fa-pinterest-square" aria-hidden="true"></i></li>
-                <li><i class="fa fa-snapchat-square" aria-hidden="true"></i></li>
-            </ul>  
-        </div>  
+        <h2 class="footerTitle">
+            ORINOCO <br> site de vente en ligne
+        </h2>
+        <ul class="social">
+            <li><i class="fab fa-facebook-square"></i></li>
+            <li><i class="fa fa-twitter-square" aria-hidden="true"></i></li>
+            <li><i class="fa fa-pinterest-square" aria-hidden="true"></i></li>
+            <li><i class="fa fa-snapchat-square" aria-hidden="true"></i></li>
+        </ul>  
     </footer>
 
     <script src="./frontend/js/utils.js"></script>

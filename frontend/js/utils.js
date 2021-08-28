@@ -12,11 +12,18 @@ function setStore(key, value) {
 
 function displayCartQuantity() {
     if (!!getStore("teddies")) {
-        let items = getStore("teddies");
         let cartQuantity = 0;
-        for (item of items) {
-            cartQuantity += item.qty
-        }
-        $("#panierQuantity").innerText = cartQuantity;
+        getStore("teddies").forEach(item => cartQuantity += item.qty)
+        renderCartQty(cartQuantity)
+        return cartQuantity
     }
 }
+
+function renderCartQty(cartQuantity) {
+    $("#panierQuantity").innerText = cartQuantity;
+}
+
+function UnitPrice(item) {
+    return Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(item.price/100); 
+}
+

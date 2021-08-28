@@ -105,7 +105,6 @@ function addProductToCart(product) {
         product.qty = quantity;
         items.push(product);
         setStore("teddies", items)
-        console.log(items);
     }
 }
 

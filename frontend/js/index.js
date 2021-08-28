@@ -13,20 +13,31 @@ function displayProducts(products) {
 }
 
 function renderProduct(product) {
-    $('#teddiesArticle').innerHTML += `<article class="article">
-            <div class="containerArticle">
-                <h3 class="article__title">
+    $('#teddiesArticle').innerHTML += 
+        `<article>
+            <a href="./frontend/pages/product.html?id=${product._id}" class="link">
+                <h3 class="name">
                     ${product.name} 
                 </h3>
-                <div class="article__picture">
+                <div class="picture">
                     <img src="${product.imageUrl}">
                 </div>
-                <div class="article__bouton">
-                    <a href="./frontend/pages/product.html?id=${product._id}" class="article__bouton__link">
-                        Voir le produit
-                    </a>    
+                <div class="price">
+                    ${UnitPrice(product)}
                 </div>
-            </div>
+            </a>    
         </article>`;
 }
 
+let navbar = $("#nav")
+let sticky = navbar.offsetTop;
+window.onscroll = function() {stickOnTop()};
+
+
+function stickOnTop() {
+    if (pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+    } else {
+        navbar.classList.remove("sticky")
+    }
+}
