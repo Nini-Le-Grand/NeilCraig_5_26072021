@@ -14,14 +14,14 @@ let items = getStore("teddies")
             productList.push(item._id);
         }
     }
-console.log(productList);
+//console.log(productList);
 
 let request = {
     contact: contactInfo,
     products: productList,
 }
 
-console.log(request);
+//console.log(request);
 
 
 $("#commande").addEventListener("submit", function send(e) {
@@ -38,6 +38,6 @@ $("#commande").addEventListener("submit", function send(e) {
     .then(response => response.json())
     .then((data) => {
         console.log(data);
-        //document.location.href = "order.html"
+        document.location.href = "order.html"
     })
 })

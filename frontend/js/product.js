@@ -1,17 +1,20 @@
 let id = getId();
 let quantity = 1;
+navbarPosition();
+
 
 fetch(`http://localhost:3000/api/teddies/${id}`)
     .then(response => response.json())
     .then(product => {
         displayTeddy(product)
         displayCartQuantity()
-        listenIncreaseQty()
-        listenDecreaseQty()
-        ListenAddToCart(product)
+        blurArrow();
+        listenToIncreaseQty();
+        listenToDecreaseQty();
+        ListenAddToCart(product);
     })
     .catch(error => {
-        alert(error)
+        alert(error);
     })
 
 function getId() {
@@ -31,45 +34,55 @@ function render(product) {
                     </option>`;          
     }
 
-    return `<div class="product__picture">
+    return `<h3 class="name">
+                ${product.name}
+            </h3>
+            <div class="picture">
                 <img src="${product.imageUrl}">
             </div>
             <div class="product__information">
 
-                <div class="product__header">
-                    <h3 class="product__title">
-                        ${product.name}
-                    </h3>
+                <div class="price">
                     <p class="product__price">
-                        ${product.price/100}€
+                        ${unitPrice(product.price)}
                     </p>
                 </div>
-
-                <p class="product__description">
+                
+                <h4>Description :</h4>
+                <p class="description">
                     ${product.description}
                 </p>
                 
-                <form class="product__color">
-                    <label for"coloris">
-                        Coloris disponibles
+                <form class="color">
+                    <label for="coloris" class="color-label">
+                        Coloris disponibles :
                     </label>
-                    <select name="color" id="coloris" class="product__coloriSelect">
+                    </br>
+                    <select name="color" id="coloris" class="color-selection">
                         ${options}
                     </select>
                 </form>
-                <p class="product__reference">
-                    Référence : ${product._id}
+                <p class="reference">
+                    <span class="ref-label">Référence :</span> ${product._id}
                 </p>
             </div>`;
 }
 
-function listenIncreaseQty() {
+function blurArrow() {
+    if($("#quantity").innerText == 1) {
+        $("#decreaseQty").classList.add("blur");
+    } else {
+        $("#decreaseQty").classList.remove("blur");
+    }
+}
+
+function listenToIncreaseQty() {
     $('#increaseQty').addEventListener("click", function() {
         quantity = increaseQty(quantity);
     })
 }
 
-function listenDecreaseQty() {
+function listenToDecreaseQty() {
     $("#decreaseQty").addEventListener("click", function() {
         if (quantity > 1) {
             quantity = decreaseQty(quantity);
@@ -77,32 +90,44 @@ function listenDecreaseQty() {
     })
 }
 
- function increaseQty(quantity) {
+function increaseQty(quantity) {
     quantity = quantity + 1;
     $("#quantity").innerText = quantity;
+    blurArrow();
     return quantity;
 }
 
 function decreaseQty(quantity) {
     quantity = quantity - 1;
     $("#quantity").innerText = quantity;
+    blurArrow();
     return quantity;
 }
 
 function ListenAddToCart(product) {
     $("#putInCart").addEventListener ("click", function() {
         setProductQuantity(product);
-        addProductToCart(product);
+        addProductWithNewOption(product)
+        addNewProductToCart(product);
         addToEmptyCart(product);
         resetQty();
-        redirect();
+        //redirect();
     })
 }
 
-function addProductToCart(product) {
+function hasProduct(product) {
+    return getStore("teddies").find(e => e._id == product._id)
+}
+
+function hasOption(items) {
+    return items.find(e => e.color == $("#coloris").value)
+}
+
+function addNewProductToCart(product) {
     if (!!getStore("teddies") && !hasProduct(product)) {
         let items = getStore("teddies")
-        product.qty = quantity;
+        delete product.colors;
+        product.options = [{color: $("#coloris").value, quantity: quantity}]
         items.push(product);
         setStore("teddies", items)
     }
@@ -110,24 +135,43 @@ function addProductToCart(product) {
 
 function addToEmptyCart(product) {
     if (!getStore("teddies")) {
-        product.qty = quantity;
+        delete product.colors;
+        product.options = [{color: $("#coloris").value, quantity: quantity}]
         setStore("teddies", [product])
     }
 }
 
-function hasProduct(product) {
-    return getStore("teddies").find(e => e._id == product._id)
-}
-
 function setProductQuantity(product) {
     if (!!getStore("teddies") && hasProduct(product)) {
-        let items = getStore("teddies")
+        let items = getStore("teddies");
         for (item of items) {
-            if (item._id == product._id) {
-                item.qty = item.qty + quantity;
+            if (item._id == product._id && hasOption(item.options)) {
+                let options = item.options;
+                for (option of options) {
+                    if ($("#coloris").value == option.color) {
+                        option.quantity = option.quantity + quantity;
+                        item.options = options;
+                        setStore("teddies", items);
+                        break;
+                    }
+                }
             }
         }
-        setStore("teddies", items);
+    }
+}
+
+function addProductWithNewOption(product) {
+    if (!!getStore("teddies") && hasProduct(product)) {
+        let items = getStore("teddies");
+        for (item of items) {
+            if (item._id == product._id && !hasOption(item.options)) {
+                let options = item.options;
+                options.push({color: $("#coloris").value, quantity: quantity});
+                item.options = options;
+                setStore("teddies", items);
+                break;
+            }
+        }
     }
 }
 

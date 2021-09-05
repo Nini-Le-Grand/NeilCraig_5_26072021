@@ -1,3 +1,5 @@
+navbarPosition();
+
 fetch("http://localhost:3000/api/teddies")
     .then(response => response.json())
     .then(products => {
@@ -23,21 +25,9 @@ function renderProduct(product) {
                     <img src="${product.imageUrl}">
                 </div>
                 <div class="price">
-                    ${UnitPrice(product)}
+                    ${unitPrice(product.price)}
                 </div>
             </a>    
         </article>`;
 }
 
-let navbar = $("#nav")
-let sticky = navbar.offsetTop;
-window.onscroll = function() {stickOnTop()};
-
-
-function stickOnTop() {
-    if (pageYOffset >= sticky) {
-        navbar.classList.add("sticky")
-    } else {
-        navbar.classList.remove("sticky")
-    }
-}

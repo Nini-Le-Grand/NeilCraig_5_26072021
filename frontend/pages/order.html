@@ -4,12 +4,129 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <a href="../../index.html">Accueil</a>
-    <a href="order.html">Panier</a>
+    <meta robot="index, follow">
+    <meta description="">
     
+    <link rel="stylesheet" href="../style/style2.css">
+    <!--<link rel="stylesheet" href="../style/sass/style.css">-->
+    <script src="https://kit.fontawesome.com/7f7cd5e7f3.js" crossorigin="anonymous"></script>
+    <title>Site de vente en ligne | Orinoco</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <header class="header">
+            <div class="logo">
+                <a href="../../index.html">
+                    <img src="../images/logoResized.png" alt="Le logo d'Orinoco">
+                </a>
+            </div>
+            <div class="content"></div>
+        </header>
+
+        <nav id="nav">
+            <div class="navbar">
+                <div class="nav-home">
+                    <a href="../../index.html" class="link">
+                        Accueil
+                    </a>
+                </div>    
+                <div class="nav-panier">
+                    <a href="./cart.html" class="link nav-cart">
+                        <span class="nav-cart-text">Panier</span><span id="panierQuantity" class="panierQuantity">0</span>
+                    </a>
+                </div>  
+            </div> 
+        </nav>
+
+        <h1 class="content">
+            Votre commande
+        </h1>
+
+        <section class="order">
+            <div class="topline">
+                <div class="orderId">Numéro de commande : <span id="orderId"></span></div>
+                <div class="productQtyBox"><span id="productQty" class="productQty"></span> article(s)</div>
+            </div>
+
+            <div class="secondline">
+                <h2 class="secondline-title">
+                    Adresse de livraison
+                </h2>
+                <div>
+                    <div class="info">
+                        <div class="info-label">Nom :</div>
+                        <div id="lastName"></div>
+                    </div>
+                    <div class="info">
+                        <div class="info-label">Prénom :</div>
+                        <div id="firstName"></div>
+                    </div>
+                    <div class="info">
+                        <div class="info-label">Adresse :</div>
+                        <div id="adress"></div>
+                    </div>
+                    <div class="info">
+                        <div class="info-label">Ville :</div>
+                        <div id="city"></div>
+                    </div>
+                    <div class="info">
+                        <div class="info-label">Email :</div>
+                        <div id="email"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="padding15">
+                <div class="orderProducts">
+                    <div class="case">Référence</div>
+                    <div class="case">Nom</div>
+                    <div class="case">Quantité</div>
+                    <div class="case">Prix Unitaire TTC</div>
+                    <div class="case">Prix Total TTC</div>
+                </div>
+
+                <div id="products">
+
+                </div>
+                
+                <div class="foot">
+                    <div class="footline">
+                        <div class="case"></div>
+                        <div class="case"></div>
+                        <div class="case"></div>
+                        <div class="case bold">Total</div>
+                        <div id="total" class="case bold"></div>
+                    </div>
+                    <div class="footline">
+                        <div class="case"></div>
+                        <div class="case"></div>
+                        <div class="case"></div>
+                        <div class="case">dont TVA</div>
+                        <div id="taxe" class="case"></div>
+                    </div>
+                </div>
+            </div>  
+
+        </section>
+
+        <footer>
+            <h2 class="footerTitle">
+                ORINOCO <br> site de vente en ligne
+            </h2>
+            <ul class="social">
+                <li><i class="fab fa-facebook-square"></i></li>
+                <li><i class="fa fa-twitter-square" aria-hidden="true"></i></li>
+                <li><i class="fa fa-pinterest-square" aria-hidden="true"></i></li>
+                <li><i class="fa fa-snapchat-square" aria-hidden="true"></i></li>
+            </ul>  
+        </footer>
+            
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/order.js"></script>
 </body>
 </html>
 

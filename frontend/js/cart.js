@@ -1,76 +1,131 @@
-let totalPrice = 0;
-
+navbarPosition();
 displayCartQuantity();
+hasItemInCart();
+listenChangeQty(decreaseQuantity, "sub");
+listenChangeQty(increaseQuantity, "add");
+displayTotal()
 
-fetch("http://localhost:3000/api/teddies")
-    .then(response => response.json())
-    .then(articles => {
-            displayEmptyCart()
-            displayProductsInCart(articles)
-            displayForm()
-
-
-            //matchItems(teddies, listItem);
-
-            /*$("#itemsQuantity").innerText = displayCartQuantity();
-            $("#totalHTPrice").innerText = `${totalPrice * 80 / 10000} €`;
-            $("#taxes").innerText = `${totalPrice * 20 / 10000} €`;
-            $("#totalPrice").innerText = `${totalPrice / 100} €`;*/
-    })
-    .catch(error => alert(error))
-
-function displayEmptyCart() {
-    if (!getStore("teddies")) { renderEmptyCart() }
+function hasItemInCart() {
+    if(!getStore("teddies")) {
+        display("#cart", "Le panier est vide");
+    }
+    else {
+        display('#cart-items', renderCart())
+        displayForm()
+    }
 }
 
-function renderEmptyCart() {
-    $('#listeProduits').innerHTML = 'Le panier est vide';
-}
+function renderCart() {
+    let items = getStore('teddies')
+    let renderCart = '';
+    for(item of items) {
+        let productLine = '';
+        for(option of item.options) {
+            let color = option.color.replace( /\s+/g, '');
+            let buttonIdMinus = item._id + color + 'sub';
+            let buttonIdPlus = item._id + color + 'add';
 
-function displayProductsInCart(products) {
-    for(item of getStore("teddies")) {
-        if (products.find( e => e._id == item._id)) {
-            renderCart(item);
+            productLine +=  `<div class="product-line">
+                                <div class="item-option">
+                                    ${option.color}
+                                </div>
+                                <div class="item-price">
+                                    ${unitPrice(item.price)}
+                                </div>
+                                <div class="item-quantity">
+                                    <div class="cart-quantity-display" id="cart-quantity-display">
+                                        ${option.quantity}
+                                    </div>
+                                    <div class="cart-quantity-buttons">
+                                        <button class="cart-quantity-button-sub" id="${buttonIdMinus}">-</button>
+                                        <button class="cart-quantity-button-add" id="${buttonIdPlus}">+</button>
+                                    </div>
+                                </div>
+                                <div class="item-total-price">
+                                    ${unitPrice(item.price * option.quantity)}
+                                </div>
+                            </div>`
         }
-     }
+        renderCart +=   `<div class="cart-product">
+                            <div class="cart-image">
+                                <img src="${item.imageUrl}">
+                            </div>
+                            <div class="cart-option">
+                                ${productLine}
+                            </div>
+                        </div>`
+    }
+    return renderCart
 }
 
-function renderCart(item) {
-    $('#listeProduits').innerHTML += `<li class="produitPanier">
-                <div>
-                    <p class="namePanier">${item.name} x${item.qty}</p>
-                    <p class="pricePanier">${UnitPrice(item)}</p>
-                </div>
-                <div class="totalProductPrice">
-                    ${totalUnitPrice(item)}
-                </div>
-            </li>`;
+function getButtonId(items, table, operator) {
+    for(item of items) {
+        for(option of item.options) {
+            let color = option.color.replace( /\s+/g, '');
+            let buttonId = item._id + color + operator
+            table.push(buttonId)
+        }
+    }
 }
 
-function totalQty() {
-    $("#itemsQuantity").innerText = displayCartQuantity()
+function listenChangeQty(event, operator) {
+    let items = getStore("teddies");
+    let ids = [];
+    getButtonId(items, ids, operator);
+    ids.forEach( e => document.getElementById(e).addEventListener('click', function()  {
+        event(e)
+    }))
 }
 
-function totalUnitPrice(item) {
-    return Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(item.price*item.qty/100); 
+function increaseQuantity(e) {
+    for(item of items) {
+        let options = item.options
+        for(option of item.options) {
+            let color = option.color.replace( /\s+/g, '');
+            if (e.includes(item._id) && e.includes(color)) {
+                option.quantity += 1; 
+                item.options = options;
+                setStore("teddies", items);
+                location.reload();
+            }
+        }
+    }
+}
+
+function decreaseQuantity(e) {
+    for(item of items) {
+        let options = item.options
+        for(option of item.options) {
+            let color = option.color.replace( /\s+/g, '');
+            if (e.includes(item._id) && e.includes(color)) {
+                option.quantity -= 1; 
+                item.options = options;
+                setStore("teddies", items);
+                location.reload();
+            }
+        }
+    }
 }
 
 function displayForm() {
     $("#formulaire").style.visibility = "visible";
 }
 
-/*
-function matchItems(teddies, listItem) {
-    for(item of listItem) {
-        for(teddy of teddies) {
-            if (teddy._id == item.id) {
-                displayItemsInCart()
-            }
-        }
-    }
+function displayTotal() {
+    let items = getStore("teddies");
+    calcTotalPrice(items)
+    display( "#quantity-items", displayCartQuantity() )
+    display( "#totalHTPrice", unitPrice(calcTotalPrice(items) * 8 / 10) )
+    display( "#taxes", unitPrice(calcTotalPrice(items) * 2 / 10) )
+    display( "#totalPrice", unitPrice(calcTotalPrice(items)) )
 }
 
-function displayItemsInCart() {
-    totalPrice += teddy.price * item.q;
-    $('#listeProduits').innerHTML += renderCart(teddy, item);
-}*/
+function calcTotalPrice(items) {
+    let totalPrice = 0;
+    for(item of items) {
+        for(option of item.options) {
+            totalPrice += (item.price * option.quantity)
+        }
+    }
+    return totalPrice;
+}

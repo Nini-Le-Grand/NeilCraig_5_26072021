@@ -7,87 +7,95 @@
     <meta robot="index, follow">
     <meta description="">
     
-    <link rel="stylesheet" href="../style/sass/style.css">
+    <link rel="stylesheet" href="../style/style2.css">
+    <!--<link rel="stylesheet" href="../style/sass/style.css">-->
     <script src="https://kit.fontawesome.com/7f7cd5e7f3.js" crossorigin="anonymous"></script>
     <title>Site de vente en ligne | Orinoco</title>
 </head>
 
 <body class="bgd-s">
-    <div id="redirect" class="redirect">
-        <div class="redirect__box">
-            <p class="redirect__message">
-                Le produit a été ajouté au panier
-            </p>
-            <p>
-                Voulez-vous afficher le panier ?
-            </p>
-            <div class="redirect__btns">
-                <a href="../../index.html" id="no" class="redirect__btn">
-                    Non
-                </a>
 
-                <a href="./cart.html" id="yes" class="redirect__btn">
-                    Oui
-                </a>
-            </div>
+    <div id="redirect" class="redirect">
+        <div class="quitter">
+            <i class="fas fa-times"></i>
+        </div>
+        <p class="message">
+            Le produit a été ajouté au panier
+        </p>
+        <p>
+            Voulez-vous afficher le panier ?
+        </p>
+        <div class="choix-btns">
+            <a href="../../index.html" id="no" class="choix-btn">
+                Non
+            </a>
+
+            <a href="./cart.html" id="yes" class="choix-btn">
+                Oui
+            </a>
         </div>
     </div>
-
-    <header class="header">
-        <div class="containerHeader">
+    <div class="container">
+        <header class="header">
             <div class="logo">
-                <a href="../../index.html" class="lien">
+                <a href="../../index.html">
                     <img src="../images/logoResized.png" alt="Le logo d'Orinoco">
                 </a>
             </div>
-            <div class="logoPanier">
-                <a href="./cart.html">
-                    Panier <span id="panierQuantity"></span>
-                </a>
+            <div class="content"></div>
+        </header>
+
+        <nav id="nav">
+            <div class="navbar">
+                <div class="nav-home">
+                    <span><a href="../../index.html" class="link">Accueil</a> > Produit</span>
+                </div>    
+                <div class="nav-panier">
+                    <a href="./cart.html" class="link nav-cart">
+                        <span class="nav-cart-text">Panier</span><span id="panierQuantity" class="panierQuantity">0</span>
+                    </a>
+                </div>  
             </div> 
-        </div>
-    </header>
-    
-    
+        </nav>
 
-    <section class="blocProduct">
-        <div class="blocProductContainer">
+        <h1 class="content">
+            Produit séléctionné
+        </h1>
 
-            <h1 class="titleProduct">
-                Article séléctionné
-            </h1>
+        <section>
+            
 
             <article class="product">
-                <div class="product__display" id="product">
+                <div class="product-bcg" id="product">
                 </div>
 
-                <div class="product__boutons"> 
+                <div class="product__boutons">
+                    <h3 class="product-quantity-title">Quantité</h3> 
                     <div class="chooseQuantity">
 
-                        <button type="button" id="decreaseQty" class="leftArrow">
+                        <button type="button" id="decreaseQty" class="arrow">
                             <i class="fas fa-chevron-left"></i>
                         </button>
 
                         <div id="quantity">1</div>
 
-                        <button type="button" id="increaseQty" class="rightArrow">
+                        <button type="button" id="increaseQty" class="arrow">
                             <i class="fas fa-chevron-right"></i>
                         </button>
 
                     </div>
                     <button type="button" id="putInCart" class="btn">
-                        Ajouter au panier
+                        <div class="btn-text">
+                            Ajouter au panier
+                        </div>
                     </button>
                 </div>
             </article>
+        </section>
 
-        </div>
-    </section>
-
-    <footer>
-        <div class="containerFooter">
+        <footer>
             <h2 class="footerTitle">
-                Orinoco, site de vente en ligne
+                ORINOCO <br> site de vente en ligne
             </h2>
             <ul class="social">
                 <li><i class="fab fa-facebook-square"></i></li>
@@ -95,9 +103,9 @@
                 <li><i class="fa fa-pinterest-square" aria-hidden="true"></i></li>
                 <li><i class="fa fa-snapchat-square" aria-hidden="true"></i></li>
             </ul>  
-        </div>  
-    </footer>
-
+        </footer>
+            
+    </div>  
     <script src="../js/utils.js"></script>
     <script src="../js/product.js"></script>
 </body>

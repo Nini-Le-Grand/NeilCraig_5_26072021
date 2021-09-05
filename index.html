@@ -7,63 +7,64 @@
     <meta robot="index, follow">
     <meta description="">
     
-    <link rel="stylesheet" href="./frontend/style/sass/style2.css">
+    <link rel="stylesheet" href="./frontend/style/style2.css">
     <!--<link rel="stylesheet" href="./frontend/style/sass/style.css">-->
     <script src="https://kit.fontawesome.com/7f7cd5e7f3.js" crossorigin="anonymous"></script>
     <title>Site de vente en ligne | Orinoco</title>
 </head>
 
-<body class="bgd-l">
-
-    <header class="header">
-        <div class="logo">
-            <a href="./index.html">
-                <img src="./frontend/images/logoResized.png" alt="Le logo d'Orinoco">
-            </a>
-        </div>
-        <div class="content"></div>
-    </header>
-
-    <nav id="nav">
-        <div class="navbar">
-            <div class="nav-home">
-                <a href="./index.html" class="link">
-                    Accueil
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <a href="./index.html">
+                    <img src="./frontend/images/logoResized.png" alt="Le logo d'Orinoco">
                 </a>
-            </div>    
-            <div class="nav-panier">
-                <a href="./frontend/pages/cart.html" class="link">
-                    Panier <span id="panierQuantity"></span>
-                </a>
-            </div>  
-        </div> 
-    </nav>
-
-    <div class="content">
-        <h1>
-            Découvrez nos ours en peluche
-        </h1>
-
-        <section class="catalog">
-            <h2>
-                Articles disponibles
-            </h2>
-            <div id="teddiesArticle" class="articles">
             </div>
-        </section>
-    </div>
+            <div class="content"></div>
+        </header>
 
-    <footer>
-        <h2 class="footerTitle">
-            ORINOCO <br> site de vente en ligne
-        </h2>
-        <ul class="social">
-            <li><i class="fab fa-facebook-square"></i></li>
-            <li><i class="fa fa-twitter-square" aria-hidden="true"></i></li>
-            <li><i class="fa fa-pinterest-square" aria-hidden="true"></i></li>
-            <li><i class="fa fa-snapchat-square" aria-hidden="true"></i></li>
-        </ul>  
-    </footer>
+        <nav id="nav">
+            <div class="navbar">
+                <div class="nav-home">
+                    <a href="./index.html" class="link">
+                        Accueil
+                    </a>
+                </div>    
+                <div class="nav-panier">
+                    <a href="./frontend/pages/cart.html" class="link nav-cart">
+                        <span class="nav-cart-text">Panier</span><span id="panierQuantity" class="panierQuantity">0</span>
+                    </a>
+                </div>  
+            </div> 
+        </nav>
+
+        <div class="content">
+            <h1>
+                Découvrez nos ours en peluche
+            </h1>
+
+            <section class="catalog">
+                <h2>
+                    Articles disponibles
+                </h2>
+                <div id="teddiesArticle" class="articles">
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <h2 class="footerTitle">
+                ORINOCO <br> site de vente en ligne
+            </h2>
+            <ul class="social">
+                <li><i class="fab fa-facebook-square"></i></li>
+                <li><i class="fa fa-twitter-square" aria-hidden="true"></i></li>
+                <li><i class="fa fa-pinterest-square" aria-hidden="true"></i></li>
+                <li><i class="fa fa-snapchat-square" aria-hidden="true"></i></li>
+            </ul>  
+        </footer>
+    </div>
 
     <script src="./frontend/js/utils.js"></script>
     <script src="./frontend/js/index.js"></script>

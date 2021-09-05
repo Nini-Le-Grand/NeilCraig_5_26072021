@@ -7,59 +7,100 @@
     <meta robot="index, follow">
     <meta description="">
     
-    <link rel="stylesheet" href="../style/sass/style.css">
+    <link rel="stylesheet" href="../style/style2.css">
+    <!--<link rel="stylesheet" href="../style/sass/style.css">-->
     <script src="https://kit.fontawesome.com/7f7cd5e7f3.js" crossorigin="anonymous"></script>
     <title>Site de vente en ligne | Orinoco</title>
 </head>
 
-<body class="bgd-s">
-    <header class="header">
-        <div class="containerHeader">
+<body>
+    <div class="container">
+        <header class="header">
             <div class="logo">
-                <a href="../../index.html" class="lien">
+                <a href="../../index.html">
                     <img src="../images/logoResized.png" alt="Le logo d'Orinoco">
                 </a>
             </div>
-            <div class="logoPanier">
-                <a href="./cart.html">
-                    Panier <span id="panierQuantity"></span>
-                </a>
+            <div class="content"></div>
+        </header>
+    
+        <nav id="nav">
+            <div class="navbar">
+                <div class="nav-home">
+                    <span><a href="../../index.html" class="link">Accueil</a> > Panier</span>
+                </div>    
+                <div class="nav-panier">
+                    <a href="./cart.html" class="link nav-cart">
+                        <span class="nav-cart-text">Panier</span><span id="panierQuantity" class="panierQuantity">0</span>
+                    </a>
+                </div>   
             </div> 
-        </div>
-    </header>
+        </nav>
+    
+        <h1 class="content">
+            Votre panier
+        </h1>
 
-    <section class="sectionPanier">
-        <div class="containerPanier">
+        <section class="cart" id="cart">
+            <div class="cart-table">
+                <div class="cart-header-line">
+                    <div class="cart-header-image">Produit</div>
+                    <div class="cart-header-product">
+                        <div class="cart-header-cell">Options</div>
+                        <div class="cart-header-cell">Prix Unitaire TTC</div>
+                        <div class="cart-header-cell-quantity">Quantité</div>
+                        <div class="cart-header-cell">Prix Total</div>
+                    </div>
+                </div>
 
-            <h1 class="panierTitle">Votre panier</h1>
-
-            <div class="produits">
-
-                <ul id="listeProduits" class="produitsPanier"></ul>
-
-                <div id="total" class="totalPanier">
-                    <p class="totalPanierDetail">
-                        Nombre d'articles : <span id="itemsQuantity"></span>
-                    </p>
-                    <p class="totalPanierDetail">
-                        Prix total HT: <span id="totalHTPrice"></span>
-                    </p>
-                    <p class="totalPanierDetail">
-                        Taxes (20%) : <span id="taxes"></span>
-                    </p>
-                    <p class="totalPanierDetail">
-                        Prix TTC : <span id="totalPrice"></span>
-                    </p>
+                <div class="cart-items" id="cart-items">
                     
                 </div>
             </div>
-        </div>
 
-        <div class="containerFormulaire">
+            <div class="total-cart">
+                
+                <div id="total" class="totalPanier">
+                    <h2>
+                        Montant de la commande :
+                    </h2>
+                    
+                    <div class="total-detail">
+                        <div class="total-line">
+                            <div class="total-text">
+                                Nombre d'articles : 
+                            </div>
+                            <div id="quantity-items"></div>
+                        </div>
+                        <div class="total-line">
+                            <div class="total-text">
+                                Prix total HT: 
+                            </div>
+                            <div id="totalHTPrice"></div>
+                        </div>
+                        <div class="total-line">
+                            <div class="total-text">
+                                Taxes (20%) : 
+                            </div>
+                            <div id="taxes"></div>
+                        </div>
+                        <div class="total-line">
+                            <div class="total-text">
+                                Prix TTC : 
+                            </div>
+                            <div id="totalPrice"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="form">
+            <h2>
+                Informations de livraison
+            </h2>
             <div id="formulaire" class="blocFormulaire">
-                <h2>
-                    Informations de livraison
-                </h2>
+                
                 <p>* champs obligatoires</p>
                 <form class="formulaire" name="commande" id="commande">
     
@@ -81,18 +122,12 @@
                             <span id="validationSaisieEmail"></span>
                         </label>
                         <input type="email" id="email" name="email">
-
+    
                         <label for="email">
                             <span>Confirmation de l'adresse email *</span>
                             <span id="validationSaisieConfEmail"></span>
                         </label>
                         <input type="email" id="confirmation-email" name="confirmation-email">
-
-                        <!--<label for="telephone">
-                            <span>Téléphone</span>
-                            <span id="validationSaisieTelephone"></span>
-                        </label>
-                        <input type="tel" id="telephone" name="telephone" placeholder="Téléphone">-->
                     </div>
                     
                     <div class="adresse">
@@ -114,14 +149,11 @@
                     </div>
                 </form>
             </div>
-        </div>
-        
-    </section>
-
-    <footer>
-        <div class="containerFooter">
+        </section>
+    
+        <footer>
             <h2 class="footerTitle">
-                Orinoco, site de vente en ligne
+                ORINOCO <br> site de vente en ligne
             </h2>
             <ul class="social">
                 <li><i class="fab fa-facebook-square"></i></li>
@@ -129,8 +161,9 @@
                 <li><i class="fa fa-pinterest-square" aria-hidden="true"></i></li>
                 <li><i class="fa fa-snapchat-square" aria-hidden="true"></i></li>
             </ul>  
-        </div>  
-    </footer>
+        </footer>
+    </div>
+
     <script src="../js/utils.js"></script>
     <script src="../js/cart.js"></script>
     <script src="../js/form.js"></script>
