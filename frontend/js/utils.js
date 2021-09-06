@@ -2,12 +2,12 @@ function $(parametre) {
     return document.querySelector(parametre);
 }
 
-function getStore(key) {
-    return JSON.parse(localStorage.getItem(key));
+function currency(item) {
+    return Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(item/100); 
 }
 
-function setStore(key, value) {
-    return localStorage.setItem(key, JSON.stringify(value));
+function display(id, data)  {
+    $(id).innerHTML = data
 }
 
 function displayCartQuantity() {
@@ -25,17 +25,26 @@ function displayCartQuantity() {
     }
 }
 
-function renderCartQty(cartQuantity) {
-    $("#panierQuantity").innerText = cartQuantity;
+function getStore(key) {
+    return JSON.parse(localStorage.getItem(key));
 }
 
-function unitPrice(item) {
-    return Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(item/100); 
-}
+function getUrlParameter(parameter) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(parameter);
+}  
 
 function navbarPosition() {
     let sticky = $("#nav").offsetTop;
     window.onscroll = function() {stickOrNot(sticky)};
+}
+
+function renderCartQty(cartQuantity) {
+    $("#panierQuantity").innerText = cartQuantity;
+}
+
+function setStore(key, value) {
+    return localStorage.setItem(key, JSON.stringify(value));
 }
 
 function stickOrNot(sticky) {
@@ -44,8 +53,4 @@ function stickOrNot(sticky) {
     } else {
         $("#nav").classList.remove("sticky")
     }
-}
-
-function display(id, data)  {
-    $(id).innerHTML = data
 }

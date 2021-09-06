@@ -1,9 +1,77 @@
 navbarPosition();
 displayCartQuantity();
 hasItemInCart();
-listenChangeQty(decreaseQuantity, "sub");
-listenChangeQty(increaseQuantity, "add");
+blur();
+listenIncreaseQty();
+listenDecreaseQty();
 displayTotal()
+
+function blur() {
+    let items = getStore("teddies");
+    let ids = [];
+    getButtonId(items, ids, "sub");
+    for(id of ids) {
+        for(item of items) {
+            options = item.options
+            for(option of item.options) {
+                let color = option.color.replace( /\s+/g, '');
+                if (id.includes(item._id) && id.includes(color) && option.quantity == 1) {
+                    document.getElementById(id).classList.add("blur-btn");
+                } else if (id.includes(item._id) && id.includes(color) && option.quantity > 1) {
+                    document.getElementById(id).classList.remove("blur-btn");
+                }
+            }
+        }
+    }
+}
+
+function calcTotalPrice(items) {
+    let totalPrice = 0;
+    for(item of items) {
+        for(option of item.options) {
+            totalPrice += (item.price * option.quantity)
+        }
+    }
+    return totalPrice;
+}
+
+function decreaseQuantity(e, items) {
+    for(item of items) {
+        let options = item.options
+        for(option of item.options) {
+            let color = option.color.replace( /\s+/g, '');
+            if (e.includes(item._id) && e.includes(color) && option.quantity > 1) {
+                option.quantity -= 1; 
+                item.options = options;
+                setStore("teddies", items);
+                location.reload();
+            }
+        }
+    }
+}
+
+function displayForm() {
+    $("#form-section").style.visibility = "visible";
+}
+
+function displayTotal() {
+    let items = getStore("teddies");
+    calcTotalPrice(items)
+    display( "#quantity-items", displayCartQuantity() )
+    display( "#totalHTPrice", currency(calcTotalPrice(items) * 8 / 10) )
+    display( "#taxes", currency(calcTotalPrice(items) * 2 / 10) )
+    display( "#totalPrice", currency(calcTotalPrice(items)) )
+}
+
+function getButtonId(items, table, operator) {
+    for(item of items) {
+        for(option of item.options) {
+            let color = option.color.replace( /\s+/g, '');
+            let buttonId = item._id + color + operator
+            table.push(buttonId)
+        }
+    }
+}
 
 function hasItemInCart() {
     if(!getStore("teddies")) {
@@ -13,6 +81,39 @@ function hasItemInCart() {
         display('#cart-items', renderCart())
         displayForm()
     }
+}
+
+function increaseQuantity(e, items) {
+    for(item of items) {
+        let options = item.options
+        for(option of item.options) {
+            let color = option.color.replace( /\s+/g, '');
+            if (e.includes(item._id) && e.includes(color)) {
+                option.quantity += 1; 
+                item.options = options;
+                setStore("teddies", items);
+                location.reload();
+            }
+        }
+    }
+}
+
+function listenDecreaseQty() {
+    let items = getStore("teddies");
+    let ids = [];
+    getButtonId(items, ids, "sub");
+    ids.forEach( e => document.getElementById(e).addEventListener('click', function()  {
+        decreaseQuantity(e, items) 
+    }))
+}
+
+function listenIncreaseQty() {
+    let items = getStore("teddies");
+    let ids = [];
+    getButtonId(items, ids, "add");
+    ids.forEach( e => document.getElementById(e).addEventListener('click', function()  {
+        increaseQuantity(e, items)
+    }))
 }
 
 function renderCart() {
@@ -30,10 +131,10 @@ function renderCart() {
                                     ${option.color}
                                 </div>
                                 <div class="item-price">
-                                    ${unitPrice(item.price)}
+                                    ${currency(item.price)}
                                 </div>
                                 <div class="item-quantity">
-                                    <div class="cart-quantity-display" id="cart-quantity-display">
+                                    <div class="cart-quantity-display">
                                         ${option.quantity}
                                     </div>
                                     <div class="cart-quantity-buttons">
@@ -42,7 +143,7 @@ function renderCart() {
                                     </div>
                                 </div>
                                 <div class="item-total-price">
-                                    ${unitPrice(item.price * option.quantity)}
+                                    ${currency(item.price * option.quantity)}
                                 </div>
                             </div>`
         }
@@ -56,76 +157,4 @@ function renderCart() {
                         </div>`
     }
     return renderCart
-}
-
-function getButtonId(items, table, operator) {
-    for(item of items) {
-        for(option of item.options) {
-            let color = option.color.replace( /\s+/g, '');
-            let buttonId = item._id + color + operator
-            table.push(buttonId)
-        }
-    }
-}
-
-function listenChangeQty(event, operator) {
-    let items = getStore("teddies");
-    let ids = [];
-    getButtonId(items, ids, operator);
-    ids.forEach( e => document.getElementById(e).addEventListener('click', function()  {
-        event(e)
-    }))
-}
-
-function increaseQuantity(e) {
-    for(item of items) {
-        let options = item.options
-        for(option of item.options) {
-            let color = option.color.replace( /\s+/g, '');
-            if (e.includes(item._id) && e.includes(color)) {
-                option.quantity += 1; 
-                item.options = options;
-                setStore("teddies", items);
-                location.reload();
-            }
-        }
-    }
-}
-
-function decreaseQuantity(e) {
-    for(item of items) {
-        let options = item.options
-        for(option of item.options) {
-            let color = option.color.replace( /\s+/g, '');
-            if (e.includes(item._id) && e.includes(color)) {
-                option.quantity -= 1; 
-                item.options = options;
-                setStore("teddies", items);
-                location.reload();
-            }
-        }
-    }
-}
-
-function displayForm() {
-    $("#formulaire").style.visibility = "visible";
-}
-
-function displayTotal() {
-    let items = getStore("teddies");
-    calcTotalPrice(items)
-    display( "#quantity-items", displayCartQuantity() )
-    display( "#totalHTPrice", unitPrice(calcTotalPrice(items) * 8 / 10) )
-    display( "#taxes", unitPrice(calcTotalPrice(items) * 2 / 10) )
-    display( "#totalPrice", unitPrice(calcTotalPrice(items)) )
-}
-
-function calcTotalPrice(items) {
-    let totalPrice = 0;
-    for(item of items) {
-        for(option of item.options) {
-            totalPrice += (item.price * option.quantity)
-        }
-    }
-    return totalPrice;
 }

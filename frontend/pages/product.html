@@ -8,32 +8,35 @@
     <meta description="">
     
     <link rel="stylesheet" href="../style/style2.css">
-    <!--<link rel="stylesheet" href="../style/sass/style.css">-->
     <script src="https://kit.fontawesome.com/7f7cd5e7f3.js" crossorigin="anonymous"></script>
     <title>Site de vente en ligne | Orinoco</title>
 </head>
 
 <body class="bgd-s">
 
-    <div id="redirect" class="redirect">
-        <div class="quitter">
-            <i class="fas fa-times"></i>
+    <div id="redirect" class="redirect-container">
+        <div class="message-box">
+            <div class="quitter">
+                <button type="button" class="quitter-box" id="quit-box">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p class="message">
+                Le produit a été ajouté au panier
+            </p>
+            <p class="question">
+                Voulez-vous accéder au panier ?
+            </p>
+            <div class="choix-btns">
+                <a href="../../index.html" id="no" class="choix-btn">
+                    Non
+                </a>
+                <a href="./cart.html" id="yes" class="choix-btn">
+                    Oui
+                </a>
+            </div>
         </div>
-        <p class="message">
-            Le produit a été ajouté au panier
-        </p>
-        <p>
-            Voulez-vous afficher le panier ?
-        </p>
-        <div class="choix-btns">
-            <a href="../../index.html" id="no" class="choix-btn">
-                Non
-            </a>
-
-            <a href="./cart.html" id="yes" class="choix-btn">
-                Oui
-            </a>
-        </div>
+        
     </div>
     <div class="container">
         <header class="header">

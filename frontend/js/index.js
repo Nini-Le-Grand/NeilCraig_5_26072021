@@ -25,7 +25,7 @@ function renderProduct(product) {
                     <img src="${product.imageUrl}">
                 </div>
                 <div class="price">
-                    ${unitPrice(product.price)}
+                    ${currency(product.price)}
                 </div>
             </a>    
         </article>`;

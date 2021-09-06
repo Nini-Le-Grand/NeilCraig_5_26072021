@@ -82,7 +82,7 @@ nav {
     width: 30px;
     height: 30px;
     border-radius: 9999px;
-    background-color: rgb(255, 67, 67);
+    background-color: rgb(255, 115, 115);
     color: white;
     font-weight: bold;
 }
@@ -280,7 +280,7 @@ footer {
 /*///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////*/
 
-.redirect {
+.redirect-container {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -290,6 +290,54 @@ footer {
     justify-content: center;
     visibility: hidden;
     z-index: 2;
+}
+
+.message-box {
+    background-color: white;
+    border-radius: 15px;
+    width: 300px;
+    height: 150px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.quitter {
+    display: flex;
+    justify-content:flex-end;
+    width: 100%;
+}
+
+.quitter-box {
+    width: 25px;
+    height: 30px;
+    border: 1px solid rgb(184, 184, 184);
+    margin-bottom: 5px;
+    background-color: white;
+}
+
+.message {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.question {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.choix-btns {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.choix-btn {
+    padding: 5px 10px;
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 20px;
 }
 
 .product {
@@ -492,6 +540,12 @@ h3 {
     background-color: rgb(233, 233, 233);
 }
 
+.blur-btn {
+    border: 2px solid rgb(219, 219, 219);
+    color: rgb(192, 192, 192);
+    background-color: rgb(255, 255, 255);
+}
+
 .item-total-price {
     display: flex;
     justify-content: center;
@@ -506,7 +560,7 @@ h3 {
 }
 
 .totalPanier {
-    border: 1px solid rgb(209, 209, 209);
+    border: 2px solid rgb(209, 209, 209);
     border-radius: 10px;
     padding: 15px;
 }
@@ -524,9 +578,75 @@ h3 {
 }
 
 .form {
+    background-color: white;
+    width: 80%;
+    margin: auto;
     visibility: hidden;
+    padding: 15px;
+    
 }
 
+.border {
+    height: 3px;
+    border-top: 2px solid #f3e9f1;
+    border-bottom: 2px solid #f3e9f1;
+}
+
+.blocFormulaire {
+    padding: 0px 15px;
+}
+
+.form-section {
+    padding: 15px;
+    border: 2px solid rgb(218, 218, 218);
+    border-radius: 15px;
+}
+
+.champs {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f3e9f1;
+    font-weight: bold;
+    color: rgb(70, 70, 70);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+.address {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+form input {
+    margin-bottom: 15px;
+    height: 20px;
+    border: 1px solid rgb(179, 179, 179);
+    border-radius: 5px;
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+}
+
+#submit-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    background-color: white;
+    font-family: 'Times New Roman', Times, serif;
+    height: 50px;
+    width: 120px;
+    font-size: 18px;
+    cursor: pointer;
+}
 
 
 

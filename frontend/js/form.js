@@ -1,32 +1,6 @@
-let contactInfo = {
-    firstName: "Neil",
-    lastName: "Craig",
-    address: "120 rue Charonne",
-    city: "Paris",
-    email: "NC@e.com",
-    }
+submit()
 
-let productList = []
-
-let items = getStore("teddies")
-    for (item of items) {
-        for( i = 0; i < item.qty; i++) {
-            productList.push(item._id);
-        }
-    }
-//console.log(productList);
-
-let request = {
-    contact: contactInfo,
-    products: productList,
-}
-
-//console.log(request);
-
-
-$("#commande").addEventListener("submit", function send(e) {
-    e.preventDefault();
-    console.log("i'm here");
+function sendRequest(request) {
     fetch("http://localhost:3000/api/teddies/order", {
         method: "POST",
         headers: {
@@ -37,7 +11,51 @@ $("#commande").addEventListener("submit", function send(e) {
     })
     .then(response => response.json())
     .then((data) => {
-        console.log(data);
-        document.location.href = "order.html"
+        document.location.href = `order.html?orderId=${data.orderId}&firstName=${$("#nom").value}&lastName=${$("#prenom").value}&address=${$('#address').value}&city=${$('#city').value}&email=${$('#email').value}`
     })
-})
+}
+
+function setCartData () {
+    productList = []
+    let items = getStore("teddies");
+    for(item of items) {
+        for(option of item.options) {
+            for(i = 0; i < option.quantity; i++) {
+                productList.push(item._id);
+            }
+        }
+        
+    }
+    return productList;
+}
+
+function setContactData() {
+    contactInfo = {
+        firstName: $("#nom").value,
+        lastName: $("#prenom").value,
+        address: $('#address').value,
+        city: $('#city').value,
+        email: $('#email').value
+    }
+    return contactInfo;
+}
+
+function setRequest(contactInfo, productList) {
+    let request = {
+        contact: contactInfo,
+        products: productList,
+    }
+    return request;
+}
+
+function submit() {
+    $("#submit-btn").addEventListener("click", function (e) {
+        e.preventDefault();
+        let contactInfo = {}
+        contactInfo = setContactData();
+        let productList = []
+        productList = setCartData();
+        let request = setRequest(contactInfo, productList);
+        sendRequest(request);
+    })
+}

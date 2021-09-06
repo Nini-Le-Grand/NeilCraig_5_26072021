@@ -95,56 +95,58 @@
             </div>
         </section>
 
-        <section class="form">
-            <h2>
+        
+        <section class="form" id="form-section" class="form-section">
+            <div class="border"></div>
+            <h2 class="">
                 Informations de livraison
             </h2>
-            <div id="formulaire" class="blocFormulaire">
+            <div class="blocFormulaire">
                 
                 <p>* champs obligatoires</p>
-                <form class="formulaire" name="commande" id="commande">
-    
-                    <div class="info">
-                        <label for="nom">
-                            <span>Nom *</span> 
-                            <span id="validationSaisieNom"></span>
-                        </label>
-                        <input type="text" id="nom" name="nom">
+                <form class="formulaire" name="commande" id="formulaire" >
+                    <div class="champs">
+                        <div class="info">
+                            <label for="nom">
+                                <span>Nom *</span> 
+                                <span id="validationSaisieNom"></span>
+                            </label>
+                            <input type="text" id="nom" name="nom">
+                            
+                            <label for="prenom">
+                                <span>Prénom *</span>
+                                <span id="validationSaisiePrenom"></span>
+                            </label>
+                            <input type="text" id="prenom" name="prenom">
+                            
+                            <label for="email">
+                                <span>Adresse email *</span>
+                                <span id="validationSaisieEmail"></span>
+                            </label>
+                            <input type="email" id="email" name="email">
+        
+                            <label for="confirmation-email">
+                                <span>Confirmation de l'adresse email *</span>
+                                <span id="validationSaisieConfEmail"></span>
+                            </label>
+                            <input type="email" id="confirmation-email" name="confirmation-email">
+                        </div>
                         
-                        <label for="prenom">
-                            <span>Prénom *</span>
-                            <span id="validationSaisiePrenom"></span>
-                        </label>
-                        <input type="text" id="prenom" name="prenom">
-                        
-                        <label for="email">
-                            <span>Adresse email *</span>
-                            <span id="validationSaisieEmail"></span>
-                        </label>
-                        <input type="email" id="email" name="email">
-    
-                        <label for="email">
-                            <span>Confirmation de l'adresse email *</span>
-                            <span id="validationSaisieConfEmail"></span>
-                        </label>
-                        <input type="email" id="confirmation-email" name="confirmation-email">
+                        <div class="address">
+                            <label for="street">
+                                <span>N° et voie *</span>
+                                <span id="validationSaisieAdresse"></span>
+                            </label>
+                            <input type="text" id="address" name="adress">
+        
+                            <label for="ville">
+                                <span>Ville *</span>
+                                <span id="validationSaisieVille"></span>
+                            </label>
+                            <input type="text" id="city" name="ville">
+                        </div>
                     </div>
-                    
-                    <div class="adresse">
-                        <label for="street">
-                            <span>N° et voie *</span>
-                            <span id="validationSaisieAdresse"></span>
-                        </label>
-                        <input type="text" id="adress" name="adress">
-    
-                        <label for="ville">
-                            <span>Ville *</span>
-                            <span id="validationSaisieVille"></span>
-                        </label>
-                        <input type="text" id="ville" name="ville">
-                    </div>
-    
-                    <div>
+                    <div class="submit">
                         <input type="submit" value="Commander" id="submit-btn" name="submit-btn" class="boutonPanier"/>
                     </div>
                 </form>
