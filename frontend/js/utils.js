@@ -2,27 +2,20 @@ function $(parametre) {
     return document.querySelector(parametre);
 }
 
-function currency(item) {
-    return Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(item/100); 
+function currency(price) {
+    return Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price/100); 
 }
 
 function display(id, data)  {
     $(id).innerHTML = data
 }
 
-function displayCartQuantity() {
-    if (!!getStore("teddies")) {
-        let cartQuantity = 0;
-        let items = getStore("teddies");
-        for(item of items) {
-            let options = item.options
-            for(option of options) {
-                cartQuantity = cartQuantity + option.quantity;
-            }
-        }
-        renderCartQty(cartQuantity)
-        return cartQuantity
+function getCartQuantity() {
+    let quantity = 0;
+    if (!!getStore("products")) {
+        getStore("products").forEach( a => a.options.forEach(b => quantity += b.quantity) )
     }
+    return quantity;
 }
 
 function getStore(key) {
@@ -36,18 +29,14 @@ function getUrlParameter(parameter) {
 
 function navbarPosition() {
     let sticky = $("#nav").offsetTop;
-    window.onscroll = function() {stickOrNot(sticky)};
-}
-
-function renderCartQty(cartQuantity) {
-    $("#panierQuantity").innerText = cartQuantity;
+    window.onscroll = function() {isSticky(sticky)};
 }
 
 function setStore(key, value) {
     return localStorage.setItem(key, JSON.stringify(value));
 }
 
-function stickOrNot(sticky) {
+function isSticky(sticky) {
     if (pageYOffset >= sticky) {
         $("#nav").classList.add("sticky")
     } else {

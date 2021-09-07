@@ -17,7 +17,7 @@ function sendRequest(request) {
 
 function setCartData () {
     productList = []
-    let items = getStore("teddies");
+    let items = getStore("products");
     for(item of items) {
         for(option of item.options) {
             for(i = 0; i < option.quantity; i++) {
@@ -49,7 +49,7 @@ function setRequest(contactInfo, productList) {
 }
 
 function submit() {
-    $("#submit-btn").addEventListener("click", function (e) {
+    $("#formulaire").addEventListener("submit", function (e) {
         e.preventDefault();
         let contactInfo = {}
         contactInfo = setContactData();

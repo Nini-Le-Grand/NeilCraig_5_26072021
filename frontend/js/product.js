@@ -1,40 +1,38 @@
-let quantity = 1;
 navbarPosition();
-
+display("#panierQuantity", getCartQuantity())
 
 fetch(`http://localhost:3000/api/teddies/${getUrlParameter('id')}`)
     .then(response => response.json())
     .then(product => {
-        displayTeddy(product)
-        displayCartQuantity()
+        display("#product", render(product))
+        display("#quantity", 1)
         blurArrow();
-        listenToIncreaseQty();
-        listenToDecreaseQty();
-        ListenAddToCart(product);
+        listenToIncreaseQty()
+        listenToDecreaseQty()
+        ListenToAddToCart(product);
     })
     .catch(error => {
-        alert(error);
-    })
+            alert(error);
+        })
 
 function addNewProductToCart(product) {
-    if (!!getStore("teddies") && !hasProduct(product)) {
-        let items = getStore("teddies")
-        delete product.colors;
-        product.options = [{color: $("#coloris").value, quantity: quantity}]
+    if (!!getStore("products") && !hasProduct(product)) {
+        let items = getStore("products");
+        product.options = [{color: $("#coloris").value, quantity: parseInt($("#quantity").innerText)}];
         items.push(product);
-        setStore("teddies", items)
+        setStore("products", items);
     }
 }
 
 function addProductWithNewOption(product) {
-    if (!!getStore("teddies") && hasProduct(product)) {
-        let items = getStore("teddies");
+    if (!!getStore("products") && hasProduct(product)) {
+        let items = getStore("products");
         for (item of items) {
             if (item._id == product._id && !hasOption(item.options)) {
                 let options = item.options;
-                options.push({color: $("#coloris").value, quantity: quantity});
+                options.push({color: $("#coloris").value, quantity: parseInt($("#quantity").innerText)});
                 item.options = options;
-                setStore("teddies", items);
+                setStore("products", items);
                 break;
             }
         }
@@ -42,10 +40,9 @@ function addProductWithNewOption(product) {
 }
 
 function addToEmptyCart(product) {
-    if (!getStore("teddies")) {
-        delete product.colors;
-        product.options = [{color: $("#coloris").value, quantity: quantity}]
-        setStore("teddies", [product])
+    if (!getStore("products")) {
+        product.options = [{color: $("#coloris").value, quantity: parseInt($("#quantity").innerText)}]
+        setStore("products", [product])
     }
 }
 
@@ -58,14 +55,9 @@ function blurArrow() {
 }
 
 function decreaseQty(quantity) {
-    quantity = quantity - 1;
-    $("#quantity").innerText = quantity;
+    quantity -= 1;
+    display("#quantity", quantity)
     blurArrow();
-    return quantity;
-}
-
-function displayTeddy(product) {
-    $('#product').innerHTML = render(product);
 }
 
 function hasOption(items) {
@@ -73,50 +65,52 @@ function hasOption(items) {
 }
 
 function hasProduct(product) {
-    return getStore("teddies").find(e => e._id == product._id)
+    return getStore("products").find(e => e._id == product._id)
 }
 
 function increaseQty(quantity) {
-    quantity = quantity + 1;
-    $("#quantity").innerText = quantity;
+    quantity += 1;
+    display("#quantity", quantity)
     blurArrow();
-    return quantity;
 }
 
-function ListenAddToCart(product) {
+function ListenToAddToCart(product) {
     $("#putInCart").addEventListener ("click", function() {
         setProductQuantity(product);
         addProductWithNewOption(product)
         addNewProductToCart(product);
         addToEmptyCart(product);
-        resetQty();
         redirect();
-        listenBackToNav();
     })
 }
 
-function listenBackToNav () {
+function listenBackToNavigation () {
     $("#quit-box").addEventListener("click", function () {
         $("#redirect").style.visibility = "hidden";
+        location.reload();
     })
 }
 
 function listenToDecreaseQty() {
     $("#decreaseQty").addEventListener("click", function() {
+        let quantity = parseInt($("#quantity").innerText)
         if (quantity > 1) {
-            quantity = decreaseQty(quantity);
+            decreaseQty(quantity);
         }
     })
 }
 
 function listenToIncreaseQty() {
     $('#increaseQty').addEventListener("click", function() {
-        quantity = increaseQty(quantity);
+        let quantity = parseInt($("#quantity").innerText)        
+        increaseQty(quantity);
     })
+    
 }
 
 function redirect() {
     $("#redirect").style.visibility = "visible";
+    listenBackToNavigation();
 }
 
 function render(product) {
@@ -160,22 +154,17 @@ function render(product) {
             </div>`;
 }
 
-function resetQty() {
-    quantity = 1;
-    $("#quantity").innerText = quantity;
-}
-
 function setProductQuantity(product) {
-    if (!!getStore("teddies") && hasProduct(product)) {
-        let items = getStore("teddies");
+    if (!!getStore("products") && hasProduct(product)) {
+        let items = getStore("products");
         for (item of items) {
             if (item._id == product._id && hasOption(item.options)) {
                 let options = item.options;
                 for (option of options) {
                     if ($("#coloris").value == option.color) {
-                        option.quantity = option.quantity + quantity;
+                        option.quantity += parseInt($("#quantity").innerText);
                         item.options = options;
-                        setStore("teddies", items);
+                        setStore("products", items);
                         break;
                     }
                 }

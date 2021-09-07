@@ -8,7 +8,6 @@
     <meta description="">
     
     <link rel="stylesheet" href="../style/style2.css">
-    <!--<link rel="stylesheet" href="../style/sass/style.css">-->
     <script src="https://kit.fontawesome.com/7f7cd5e7f3.js" crossorigin="anonymous"></script>
     <title>Site de vente en ligne | Orinoco</title>
 </head>
@@ -28,9 +27,7 @@
         <nav id="nav">
             <div class="navbar">
                 <div class="nav-home">
-                    <a href="../../index.html" class="link">
-                        Accueil
-                    </a>
+                    <a href="../../index.html" class="link">Accueil</a>>commande
                 </div>    
                 <div class="nav-panier">
                     <a href="./cart.html" class="link nav-cart">
@@ -55,23 +52,23 @@
                     Adresse de livraison
                 </h2>
                 <div>
-                    <div class="info">
+                    <div class="order-info">
                         <div class="info-label">Nom :</div>
                         <div id="lastName"></div>
                     </div>
-                    <div class="info">
+                    <div class="order-info">
                         <div class="info-label">Prénom :</div>
                         <div id="firstName"></div>
                     </div>
-                    <div class="info">
+                    <div class="order-info">
                         <div class="info-label">Adresse :</div>
                         <div id="address"></div>
                     </div>
-                    <div class="info">
+                    <div class="order-info">
                         <div class="info-label">Ville :</div>
                         <div id="city"></div>
                     </div>
-                    <div class="info">
+                    <div class="order-info">
                         <div class="info-label">Email :</div>
                         <div id="email"></div>
                     </div>
@@ -82,9 +79,10 @@
                 <div class="orderProducts">
                     <div class="case">Référence</div>
                     <div class="case">Nom</div>
-                    <div class="case">Quantité</div>
-                    <div class="case">Prix Unitaire TTC</div>
-                    <div class="case">Prix Total TTC</div>
+                    <div class="case">Option</div>
+                    <div class="case-center">Quantité</div>
+                    <div class="case-end">Prix Unitaire TTC</div>
+                    <div class="case-end">Prix Total TTC</div>
                 </div>
 
                 <div id="products">
@@ -93,18 +91,20 @@
                 
                 <div class="foot">
                     <div class="footline">
-                        <div class="case"></div>
-                        <div class="case"></div>
-                        <div class="case"></div>
-                        <div class="case bold">Total</div>
-                        <div id="total" class="case bold"></div>
+                        <div class="case no-border"></div>
+                        <div class="case no-border"></div>
+                        <div class="case no-border"></div>
+                        <div class="case-center no-border"></div>
+                        <div class="case-end bold no-border">Total</div>
+                        <div id="total" class="case-end bold no-border"></div>
                     </div>
                     <div class="footline">
-                        <div class="case"></div>
-                        <div class="case"></div>
-                        <div class="case"></div>
-                        <div class="case">dont TVA</div>
-                        <div id="taxe" class="case"></div>
+                        <div class="case no-border"></div>
+                        <div class="case no-border"></div>
+                        <div class="case no-border"></div>
+                        <div class="case-center no-border"></div>
+                        <div class="case-end italic">dont TVA</div>
+                        <div id="taxe" class="case-end italic"></div>
                     </div>
                 </div>
             </div>  

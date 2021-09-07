@@ -417,6 +417,7 @@ footer {
 .blur {
     border: 2px solid rgb(207, 207, 207);
     color: rgb(207, 207, 207);
+    cursor: default;
 }
 
 h3 {
@@ -428,14 +429,41 @@ h3 {
 ////////////////////////////////////////////////////*/
 
 .cart {
-    display: flex;
+    
     padding: 15px;
     background-color: white;
     width: 80%;
     margin: auto;
 }
 
+.empty-cart {
+    display: flex;
+    justify-content:flex-end;
+}
+
+.empty-button {
+    margin: 10px 0px;
+    background-color: rgb(255, 131, 131);
+    padding: 13px;
+    border-radius: 20px;
+    border: 2px solid rgb(255, 131, 131);
+    font-size: 18px;
+    color: white;
+}
+
+.empty-button:hover {
+    background-color: rgb(255, 82, 82);
+    border: 2px solid rgb(255, 82, 82);
+}
+
+.cart-display {
+    display: flex;
+}
+
 .cart-table {
+    padding: 20px;
+    border: 2px solid rgb(207, 207, 207);
+    border-radius: 15px;
     margin-right: 20px;
     flex: 7;
 }
@@ -544,6 +572,7 @@ h3 {
     border: 2px solid rgb(219, 219, 219);
     color: rgb(192, 192, 192);
     background-color: rgb(255, 255, 255);
+    cursor: default;
 }
 
 .item-total-price {
@@ -554,14 +583,13 @@ h3 {
 }
 
 .total-cart {
-    border-left: 2px solid rgb(153, 153, 153);
     padding-left: 10px;
     flex: 3;
 }
 
 .totalPanier {
     border: 2px solid rgb(209, 209, 209);
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 15px;
 }
 
@@ -684,16 +712,15 @@ form input {
     padding-bottom: 15px;
 }
 
-.padding15 {
-    padding: 0px 15px;
-}
-
 .secondline-title {
     padding: 0px;
 }
 
-.info {
+.order-info {
     display: flex;
+    flex-direction: row;
+    margin: 10px 0px;
+    
 }
 
 .info-label {
@@ -706,12 +733,39 @@ form input {
 }
 
 .case {
+    display: flex;
+    align-items: center;
     padding: 5px;
     width: 20%;
     word-wrap: break-word;
-    
-    text-align: left;
     border-top: 1px solid grey;
+}
+
+.case-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid grey;
+    width: 10%;
+}
+
+.case-end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+    padding: 5px;
+    width: 15%;
+    word-wrap: break-word;
+    border-top: 1px solid grey;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.no-border {
+    border-top: 1px solid white;
 }
 
 .orderProducts {
@@ -720,8 +774,10 @@ form input {
     font-weight: bold;
 }
 
-.hide {
-    word-wrap: normal;
+.case-hide {
+    padding: 5px;
+    width: 20%;
+    border-top: 1px solid grey;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -741,7 +797,6 @@ form input {
 .footline {
     display: flex;
     justify-content: flex-end;
-    border-bottom: 1px solid grey;
 }
 
 @media all and (min-width:800px) {

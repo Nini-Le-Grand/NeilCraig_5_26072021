@@ -1,31 +1,39 @@
 navbarPosition();
-displayCartQuantity();
+display("#panierQuantity", getCartQuantity())
 display("#orderId", getUrlParameter('orderId'));
-display("#productQty", displayCartQuantity());
+display("#productQty", getCartQuantity());
 display("#lastName", getUrlParameter('lastName'));
 display("#firstName", getUrlParameter('firstName'));
 display("#address", getUrlParameter('address'));
 display("#city", getUrlParameter('city'));
 display("#email", getUrlParameter('email'));
-displayCart();
+display('#products', setOrderDisplay());
 
 
-function displayCart() {
-    let items = getStore("teddies")
+
+function setOrderDisplay() {
+    let items = getStore("products");
+    let orderDisplay = '';
     let total = 0;
-    
-    for (item of items) {
-        total += (item.price * item.quantity)
-        $("#products").innerHTML += 
-            `<div class="item">
-                <div class="case hide">${item._id}</div>
-                <div class="case">${item.name}</div>
-                <div class="case">${item.quantity}</div>
-                <div class="case">${currency(item.price)}</div>
-                <div class="case">${currency(item.price * item.quantity)}</div>
-            </div>`
-    }
-    let taxes = total * (20 / 100)
+    items.forEach( item => {
+        let options = item.options;
+        options.forEach( option => {
+            orderDisplay += renderProducts(item, option);
+            total += (item.price * option.quantity)
+        })
+    })
     display("#total", currency(total))
-    display("#taxe", currency(taxes))
+    display("#taxe", currency(total * 2 / 10))
+    return orderDisplay;
+}
+
+function renderProducts(item, option) {
+    return `<div class="item">
+                <div class="case-hide">${item._id}</div>
+                <div class="case">${item.name}</div>
+                <div class="case">${option.color}</div>
+                <div class="case-center">${option.quantity}</div>
+                <div class="case-end">${currency(item.price)}</div>
+                <div class="case-end">${currency(item.price * option.quantity)}</div>
+            </div>`
 }

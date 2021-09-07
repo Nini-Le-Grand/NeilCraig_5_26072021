@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    <div id="alert"></div>
     <div class="container">
         <header class="header">
             <div class="logo">
@@ -42,57 +43,66 @@
         </h1>
 
         <section class="cart" id="cart">
-            <div class="cart-table">
-                <div class="cart-header-line">
-                    <div class="cart-header-image">Produit</div>
-                    <div class="cart-header-product">
-                        <div class="cart-header-cell">Options</div>
-                        <div class="cart-header-cell">Prix Unitaire TTC</div>
-                        <div class="cart-header-cell-quantity">Quantité</div>
-                        <div class="cart-header-cell">Prix Total</div>
-                    </div>
-                </div>
-
-                <div class="cart-items" id="cart-items">
-                    
-                </div>
+            <div class="empty-cart" id="empty-cart">
+                <button type="button" class="empty-button" id="empty-button">
+                    Vider le panier <i class="fas fa-trash"></i>
+                </button>
             </div>
 
-            <div class="total-cart">
-                
-                <div id="total" class="totalPanier">
-                    <h2>
-                        Montant de la commande :
-                    </h2>
+            <div class="cart-display">
+                <div class="cart-table">
+                    <div class="cart-header-line">
+                        <div class="cart-header-image">Produit</div>
+                        <div class="cart-header-product">
+                            <div class="cart-header-cell">Options</div>
+                            <div class="cart-header-cell">Prix Unitaire TTC</div>
+                            <div class="cart-header-cell-quantity">Quantité</div>
+                            <div class="cart-header-cell">Prix Total</div>
+                        </div>
+                    </div>
+    
+                    <div class="cart-items" id="cart-items">
+                        
+                    </div>
+                </div>
+    
+                <div class="total-cart">
                     
-                    <div class="total-detail">
-                        <div class="total-line">
-                            <div class="total-text">
-                                Nombre d'articles : 
+                    <div id="total" class="totalPanier">
+                        <h2>
+                            Montant de la commande :
+                        </h2>
+                        
+                        <div class="total-detail">
+                            <div class="total-line">
+                                <div class="total-text">
+                                    Nombre d'articles : 
+                                </div>
+                                <div id="quantity-items"></div>
                             </div>
-                            <div id="quantity-items"></div>
-                        </div>
-                        <div class="total-line">
-                            <div class="total-text">
-                                Prix total HT: 
+                            <div class="total-line">
+                                <div class="total-text">
+                                    Prix total HT: 
+                                </div>
+                                <div id="totalHTPrice"></div>
                             </div>
-                            <div id="totalHTPrice"></div>
-                        </div>
-                        <div class="total-line">
-                            <div class="total-text">
-                                Taxes (20%) : 
+                            <div class="total-line">
+                                <div class="total-text">
+                                    Taxes (20%) : 
+                                </div>
+                                <div id="taxes"></div>
                             </div>
-                            <div id="taxes"></div>
-                        </div>
-                        <div class="total-line">
-                            <div class="total-text">
-                                Prix TTC : 
+                            <div class="total-line">
+                                <div class="total-text">
+                                    Prix TTC : 
+                                </div>
+                                <div id="totalPrice"></div>
                             </div>
-                            <div id="totalPrice"></div>
                         </div>
                     </div>
                 </div>
             </div>
+            
         </section>
 
         
