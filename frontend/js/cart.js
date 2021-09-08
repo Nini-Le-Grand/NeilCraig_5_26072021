@@ -13,8 +13,47 @@ function calcTotalPrice(items) {
     return totalPrice;
 }
 
-function showForm() {
-    $("#form-section").style.visibility = "visible";
+function decreaseQuantity(e, items, item, options, option) {
+    let color = option.color.replace( /\s+/g, '');
+    if (e.includes(item._id) && e.includes(color)) {
+        option.quantity -= 1; 
+        item.options = options;
+        setStore("products", items);
+        location.reload()
+    }
+}
+
+function deleteItem(items, item) {
+    items.splice(items.indexOf(item), 1)
+    setStore("products", items);
+    location.reload()
+}
+
+function deleteOption(items, item, options, option) {
+    options.splice(options.indexOf(option), 1);
+    item.options = options;
+    setStore("products", items);
+    location.reload()
+}
+
+function deleteProduct(e, items, item, options, option) {
+    let color = option.color.replace( /\s+/g, '');
+    if (e.includes(item._id) && e.includes(color)) {
+        if(item.options.length > 1) {
+            deleteOption(items, item, options, option);
+        } else if(item.options.length == 1 && items.length > 1) {
+            deleteItem(items, item);
+        } else if(items.length == 1 && options.length == 1) {
+            emptyCart();
+        }
+    }
+}
+
+function emptyCart() {
+    display("#alert", renderEmptyCartAlert());
+    $("#redirect").style.visibility = "visible";
+    listenToQuitAlert()
+    listenToValidateEmptyCart()
 }
 
 function getButtonId(items, table, operator) {
@@ -45,23 +84,6 @@ function hasItemInCart() {
     }
 }
 
-function listenIncreaseQty() {
-    let items = getStore("products");
-    let ids = [];
-    getButtonId(items, ids, "add");
-    ids.forEach( e => {
-        document.getElementById(e).addEventListener('click', function()  {
-            items.forEach( item => {
-                let options = item.options;
-                options.forEach( option => {
-                    increaseQuantity(e, items, item, options, option);
-                    location.reload();
-                })
-            })
-        })
-    })
-}
-
 function increaseQuantity(e, items, item, options, option) {
     let color = option.color.replace( /\s+/g, '');
     if (e.includes(item._id) && e.includes(color)) {
@@ -89,17 +111,27 @@ function listenDecreaseQty() {
     }))
 }
 
+function listenIncreaseQty() {
+    let items = getStore("products");
+    let ids = [];
+    getButtonId(items, ids, "add");
+    ids.forEach( e => {
+        document.getElementById(e).addEventListener('click', function()  {
+            items.forEach( item => {
+                let options = item.options;
+                options.forEach( option => {
+                    increaseQuantity(e, items, item, options, option);
+                    location.reload();
+                })
+            })
+        })
+    })
+}
+
 function listenToEmptyCart() {
     $("#empty-cart").addEventListener("click", function() {
         emptyCart()
     })
-}
-
-function emptyCart() {
-    display("#alert", renderEmptyCartAlert());
-    $("#redirect").style.visibility = "visible";
-    listenToQuitAlert()
-    listenToValidateEmptyCart()
 }
 
 function listenToQuitAlert() {
@@ -113,6 +145,17 @@ function listenToValidateEmptyCart() {
         localStorage.clear();
         document.location.href ="../../index.html"
     })
+}
+
+function renderCart(item) {
+    return `<div class="cart-product">
+                <div class="cart-image">
+                    <img src="${item.imageUrl}">
+                </div>
+                <div class="cart-option">
+                    ${setOptionDisplay(item)}
+                </div>
+            </div>`
 }
 
 function renderEmptyCartAlert() {
@@ -129,70 +172,6 @@ function renderEmptyCartAlert() {
                             Oui
                         </button>
                     </div>
-                </div>
-            </div>`
-}
-
-function deleteProduct(e, items, item, options, option) {
-    let color = option.color.replace( /\s+/g, '');
-    if (e.includes(item._id) && e.includes(color)) {
-        if(item.options.length > 1) {
-            deleteOption(items, item, options, option);
-        } else if(item.options.length == 1 && items.length > 1) {
-            deleteItem(items, item);
-        } else if(items.length == 1 && options.length == 1) {
-            emptyCart();
-        }
-    }
-}
-
-function deleteOption(items, item, options, option) {
-    options.splice(options.indexOf(option), 1);
-    item.options = options;
-    setStore("products", items);
-    location.reload()
-}
-
-function deleteItem(items, item) {
-    items.splice(items.indexOf(item), 1)
-    setStore("products", items);
-    location.reload()
-}
-
-function decreaseQuantity(e, items, item, options, option) {
-    let color = option.color.replace( /\s+/g, '');
-    if (e.includes(item._id) && e.includes(color)) {
-        option.quantity -= 1; 
-        item.options = options;
-        setStore("products", items);
-        location.reload()
-    }
-}
-
-function setCartDisplay() {
-    let cartDisplay = '';
-    let items = getStore("products");
-    items.forEach( item => {
-        cartDisplay += renderCart(item)
-    })
-    return cartDisplay;
-}
-
-function setOptionDisplay(item) {
-    let optionDisplay = '';
-    item.options.forEach( option => {
-        optionDisplay += renderOptionLine(item, option)
-    })
-    return optionDisplay;
-}
-
-function renderCart(item) {
-    return `<div class="cart-product">
-                <div class="cart-image">
-                    <img src="${item.imageUrl}">
-                </div>
-                <div class="cart-option">
-                    ${setOptionDisplay(item)}
                 </div>
             </div>`
 }
@@ -221,4 +200,25 @@ function renderOptionLine(item, option) {
                     ${currency(item.price * option.quantity)}
                 </div>
             </div>`
+}
+
+function setCartDisplay() {
+    let cartDisplay = '';
+    let items = getStore("products");
+    items.forEach( item => {
+        cartDisplay += renderCart(item)
+    })
+    return cartDisplay;
+}
+
+function setOptionDisplay(item) {
+    let optionDisplay = '';
+    item.options.forEach( option => {
+        optionDisplay += renderOptionLine(item, option)
+    })
+    return optionDisplay;
+}
+
+function showForm() {
+    $("#form-section").style.visibility = "visible";
 }

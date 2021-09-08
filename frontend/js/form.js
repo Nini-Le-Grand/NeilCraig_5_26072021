@@ -1,4 +1,4 @@
-submit()
+listenToSubmit()
 
 function sendRequest(request) {
     fetch("http://localhost:3000/api/teddies/order", {
@@ -11,12 +11,13 @@ function sendRequest(request) {
     })
     .then(response => response.json())
     .then((data) => {
+        console.log(data);
         document.location.href = `order.html?orderId=${data.orderId}&firstName=${$("#nom").value}&lastName=${$("#prenom").value}&address=${$('#address').value}&city=${$('#city').value}&email=${$('#email').value}`
     })
 }
 
 function setCartData () {
-    productList = []
+    let productList = []
     let items = getStore("products");
     for(item of items) {
         for(option of item.options) {
@@ -30,7 +31,7 @@ function setCartData () {
 }
 
 function setContactData() {
-    contactInfo = {
+    let contactInfo = {
         firstName: $("#nom").value,
         lastName: $("#prenom").value,
         address: $('#address').value,
@@ -40,22 +41,59 @@ function setContactData() {
     return contactInfo;
 }
 
-function setRequest(contactInfo, productList) {
+function setRequest() {
     let request = {
-        contact: contactInfo,
-        products: productList,
+        contact: setContactData(),
+        products: setCartData(),
     }
     return request;
 }
 
-function submit() {
+function listenToSubmit() {
     $("#formulaire").addEventListener("submit", function (e) {
         e.preventDefault();
-        let contactInfo = {}
-        contactInfo = setContactData();
-        let productList = []
-        productList = setCartData();
-        let request = setRequest(contactInfo, productList);
+        let request = setRequest();
         sendRequest(request);
+        //verifyFields();
+        //verifyAllFieldsCompleted()
+        //if(!!verifyFields() && !!verifyAllFieldsCompleted()) {
+        //    let request = setRequest();
+        //    sendRequest(request);
+        //} else {
+        //    return;
+        //}
     })
+}
+
+function verifyAllFieldsCompleted() {
+    if(!!verifyField(nom, /^[a-zA-ZÀ-ÿ]/) && !!verifyField(prenom, /^[a-zA-ZÀ-ÿ]/) && !!verifyField(email, /\S+@\S+\.\S+/) && !!verifyField(/\S+@\S+\.\S+/) && !!verifyField(address, /^[a-zA-ZÀ-ÿ]/) && !!verifyField(city, /^[a-zA-ZÀ-ÿ]/)) {
+        return true;
+    } else {
+        console.log("erreur");
+        return;
+    }
+}
+
+function verifyFields() {
+    if(!!verifyRegex()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function verifyRegex(id, regex) {
+    if($(`"#${id}"`).value !== '') {
+        if (regex.test($(`"#${id}"`).value)) {
+            display(`"#${id}ValidationSaisie"`, "Le champ est correctement renseigné")
+            return true;
+        } else {
+            display(`"#${id}ValidationSaisie"`, "La saisie est invalide")
+            return false;
+        }
+        
+    } else if ($(id).value == '') {
+        display(`"#${id}ValidationSaisie"`, "Veuillez renseigner ce champ")
+        return false;
+    }
 }

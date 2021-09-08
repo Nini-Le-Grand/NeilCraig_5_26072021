@@ -27,19 +27,20 @@ function getUrlParameter(parameter) {
     return urlParams.get(parameter);
 }  
 
-function navbarPosition() {
-    let sticky = $("#nav").offsetTop;
-    window.onscroll = function() {isSticky(sticky)};
-}
-
-function setStore(key, value) {
-    return localStorage.setItem(key, JSON.stringify(value));
-}
-
 function isSticky(sticky) {
     if (pageYOffset >= sticky) {
         $("#nav").classList.add("sticky")
     } else {
         $("#nav").classList.remove("sticky")
     }
+}
+
+function navbarPosition() {
+    let sticky = $("#nav").offsetTop;
+    window.onscroll = function() {isSticky(sticky)};
+    console.log(sticky);
+}
+
+function setStore(key, value) {
+    return localStorage.setItem(key, JSON.stringify(value));
 }
