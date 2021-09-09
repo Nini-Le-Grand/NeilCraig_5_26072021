@@ -107,13 +107,14 @@
 
         
         <section class="form" id="form-section" class="form-section">
+        
             <div class="border"></div>
             <h2 class="">
                 Informations de livraison
             </h2>
             <div class="blocFormulaire">
                 
-                <p>* champs obligatoires</p>
+                <p class="formWarning"><span>* champs obligatoires</span><span id="formAlert"></span></p>
                 <form class="formulaire" name="commande" id="formulaire" >
                     <div class="champs">
                         <div class="info">
@@ -125,7 +126,7 @@
                             
                             <label for="prenom">
                                 <span>Prénom *</span>
-                                <span id="premonValidationSaisie"></span>
+                                <span id="prenomValidationSaisie"></span>
                             </label>
                             <input type="text" id="prenom" name="prenom">
                             
@@ -145,13 +146,13 @@
                         <div class="address">
                             <label for="street">
                                 <span>N° et voie *</span>
-                                <span id="adressValidationSaisie"></span>
+                                <span id="addressValidationSaisie"></span>
                             </label>
                             <input type="text" id="address" name="adress">
         
                             <label for="ville">
                                 <span>Ville *</span>
-                                <span id="cityValidationSaisie"></span>
+                                <span id="cityValidationSaisie" class="formAlert"></span>
                             </label>
                             <input type="text" id="city" name="ville">
                         </div>
