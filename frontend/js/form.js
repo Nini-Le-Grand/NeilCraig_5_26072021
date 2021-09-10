@@ -1,5 +1,14 @@
 listenToSubmit()
 
+function listenToSubmit() {
+    $("#submit-btn").addEventListener("click", function (e) {
+        e.preventDefault();
+        if(verifyAllFieldsCompleted()) {
+            verifyAllRegex()
+        }
+    })
+}
+
 function sendRequest(request) {
     fetch("http://localhost:3000/api/teddies/order", {
         method: "POST",
@@ -49,15 +58,6 @@ function setRequest() {
     return request;
 }
 
-function listenToSubmit() {
-    $("#submit-btn").addEventListener("click", function (e) {
-        e.preventDefault();
-        if(verifyAllFieldsCompleted()) {
-            verifyAllRegex()
-        }
-    })
-}
-
 function verifyAllFieldsCompleted() {
     verifyFieldCompleted('nom')
     verifyFieldCompleted('prenom')
@@ -73,22 +73,6 @@ function verifyAllFieldsCompleted() {
         return false;
     }
     
-}
-
-function verifyFieldCompleted(id) {
-    if(document.getElementById(id).value != '') {
-        document.getElementById(`${id}ValidationSaisie`).innerHTML = ''
-        document.getElementById(id).classList.remove('false-border')
-        document.getElementById(id).classList.add('true-border')
-        return true
-    }
-    else {
-        document.getElementById(`${id}ValidationSaisie`).innerHTML = "Ce champ est obligatoire";
-        document.getElementById(`${id}ValidationSaisie`).classList.add('alertWarning')
-        document.getElementById(id).classList.remove('true-border')
-        document.getElementById(id).classList.add('false-border')
-        return false
-    }
 }
 
 function verifyAllRegex() {
@@ -110,18 +94,20 @@ function verifyAllRegex() {
     }
 }
 
-function verifyRegex(regex, id) {
-    if(regex.test(document.getElementById(id).value)) {
-        document.getElementById(`${id}ValidationSaisie`).innerHTML = '';
+function verifyFieldCompleted(id) {
+    if(document.getElementById(id).value != '') {
+        document.getElementById(`${id}ValidationSaisie`).innerHTML = ''
         document.getElementById(id).classList.remove('false-border')
         document.getElementById(id).classList.add('true-border')
-    } else {
-        document.getElementById(`${id}ValidationSaisie`).innerHTML = "Ce champ n'est pas correctement renseigné";
+        return true
+    }
+    else {
+        document.getElementById(`${id}ValidationSaisie`).innerHTML = "Ce champ est obligatoire";
         document.getElementById(`${id}ValidationSaisie`).classList.add('alertWarning')
         document.getElementById(id).classList.remove('true-border')
         document.getElementById(id).classList.add('false-border')
+        return false
     }
-    return regex.test(document.getElementById(id).value)
 }
 
 function verifyMatchingEmail () {
@@ -139,3 +125,18 @@ function verifyMatchingEmail () {
         document.getElementById('confirmation-email').classList.add('false-border')
     }
 }
+
+function verifyRegex(regex, id) {
+    if(regex.test(document.getElementById(id).value)) {
+        document.getElementById(`${id}ValidationSaisie`).innerHTML = '';
+        document.getElementById(id).classList.remove('false-border')
+        document.getElementById(id).classList.add('true-border')
+    } else {
+        document.getElementById(`${id}ValidationSaisie`).innerHTML = "Ce champ n'est pas correctement renseigné";
+        document.getElementById(`${id}ValidationSaisie`).classList.add('alertWarning')
+        document.getElementById(id).classList.remove('true-border')
+        document.getElementById(id).classList.add('false-border')
+    }
+    return regex.test(document.getElementById(id).value)
+}
+
