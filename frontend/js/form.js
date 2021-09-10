@@ -103,7 +103,10 @@ function verifyAllRegex() {
     verifyRegex(regexEmail, 'confirmation-email')
 
     if(verifyRegex(regexName, 'nom') && verifyRegex(regexName, 'prenom') && verifyRegex(regexAddress, 'address') && verifyRegex(regexName, 'city') && verifyRegex(regexEmail, 'email') && verifyRegex(regexEmail, 'confirmation-email')) {
+        document.getElementById('formAlert').innerHTML = '';
         verifyMatchingEmail()
+    } else {
+        document.getElementById('formAlert').innerHTML = "Certains champs sont mal renseignés"
     }
 }
 
@@ -126,7 +129,8 @@ function verifyMatchingEmail () {
         let request = setRequest();
         sendRequest(request);
     } else {
-        document.getElementById(`emailValidationSaisie`).innerHTML = "les addresses renseignées ne sont pas identiques";
+        document.getElementById('formAlert').innerHTML = "les addresses email renseignées ne sont pas identiques"
+        document.getElementById(`emailValidationSaisie`).innerHTML = "les addresses email ne sont pas identiques";
         document.getElementById(`emailValidationSaisie`).classList.add('alertWarning')
         document.getElementById(`confirmation-emailValidationSaisie`).classList.add('alertWarning')
         document.getElementById('email').classList.remove('true-border')

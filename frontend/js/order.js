@@ -1,5 +1,4 @@
 navbarPosition();
-display("#panierQuantity", getCartQuantity())
 display("#orderId", getUrlParameter('orderId'));
 display("#productQty", getCartQuantity());
 display("#lastName", getUrlParameter('lastName'));
@@ -8,7 +7,8 @@ display("#address", getUrlParameter('address'));
 display("#city", getUrlParameter('city'));
 display("#email", getUrlParameter('email'));
 display('#products', setOrderDisplay());
-
+localStorage.clear();
+display("#panierQuantity", getCartQuantity());
 
 
 function setOrderDisplay() {

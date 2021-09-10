@@ -38,7 +38,6 @@ function isSticky(sticky) {
 function navbarPosition() {
     let sticky = $("#nav").offsetTop;
     window.onscroll = function() {isSticky(sticky)};
-    console.log(sticky);
 }
 
 function setStore(key, value) {
