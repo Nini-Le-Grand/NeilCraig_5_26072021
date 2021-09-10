@@ -139,4 +139,3 @@ function verifyRegex(regex, id) {
     }
     return regex.test(document.getElementById(id).value)
 }
-
