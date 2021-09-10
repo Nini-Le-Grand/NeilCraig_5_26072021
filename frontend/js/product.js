@@ -120,9 +120,9 @@ function render(product) {
                         ${color}
                     </option>`;          
     }
-    return `<h3 class="name">
+    return `<h2 class="name">
                 ${product.name}
-            </h3>
+            </h2>
             <div class="picture">
                 <img src="${product.imageUrl}">
             </div>
